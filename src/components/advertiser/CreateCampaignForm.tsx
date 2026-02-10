@@ -1,19 +1,25 @@
-import { useState } from 'react';
-import { Button } from '../../components/ui/button';
-import { Input } from '../../components/ui/input';
-import { InputField } from '../../components/ui/input-group';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
-import { useWeb3 } from '../../hooks/useWeb3';
-import { useNotification } from '../../context/NotificationContext';
-import { Zap, Target, Clock, DollarSign } from 'lucide-react';
+import { useState } from "react";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { InputField } from "../../components/ui/input-group";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
+import { useWeb3 } from "../../hooks/useWeb3";
+import { useNotification } from "../../context/NotificationContext";
+import { Zap, Target, Clock, DollarSign } from "lucide-react";
 
 export const CreateCampaignForm = () => {
-  const [commissionRate, setCommissionRate] = useState('');
-  const [clearingPeriod, setClearingPeriod] = useState('');
-  const [campaignName, setCampaignName] = useState('');
-  const [budget, setBudget] = useState('');
+  const [commissionRate, setCommissionRate] = useState("");
+  const [clearingPeriod, setClearingPeriod] = useState("");
+  const [campaignName, setCampaignName] = useState("");
+  const [budget, setBudget] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const { factoryContract } = useWeb3();
   const { showNotification } = useNotification();
 
@@ -21,9 +27,9 @@ export const CreateCampaignForm = () => {
     e.preventDefault();
     if (!factoryContract) {
       showNotification({
-        type: 'error',
-        title: 'Wallet Not Connected',
-        message: 'Please connect your wallet first'
+        type: "error",
+        title: "Wallet Not Connected",
+        message: "Please connect your wallet first",
       });
       return;
     }
@@ -32,34 +38,34 @@ export const CreateCampaignForm = () => {
     try {
       const tx = await factoryContract.createCampaign(
         commissionRate,
-        clearingPeriod
+        clearingPeriod,
       );
-      
+
       showNotification({
-        type: 'info',
-        title: 'Transaction Submitted',
-        message: 'Creating your campaign...'
+        type: "info",
+        title: "Transaction Submitted",
+        message: "Creating your campaign...",
       });
 
       await tx.wait();
-      
+
       showNotification({
-        type: 'success',
-        title: 'Campaign Created!',
-        message: 'Your affiliate campaign is now live'
+        type: "success",
+        title: "Campaign Created!",
+        message: "Your affiliate campaign is now live",
       });
-      
+
       // Reset form
-      setCommissionRate('');
-      setClearingPeriod('');
-      setCampaignName('');
-      setBudget('');
+      setCommissionRate("");
+      setClearingPeriod("");
+      setCampaignName("");
+      setBudget("");
     } catch (error: any) {
-      console.error('Error creating campaign:', error);
+      console.error("Error creating campaign:", error);
       showNotification({
-        type: 'error',
-        title: 'Creation Failed',
-        message: error.message || 'Failed to create campaign'
+        type: "error",
+        title: "Creation Failed",
+        message: error.message || "Failed to create campaign",
       });
     } finally {
       setIsLoading(false);
@@ -67,15 +73,15 @@ export const CreateCampaignForm = () => {
   };
 
   const presetPeriods = [
-    { label: '7 Days', value: '604800' },
-    { label: '14 Days', value: '1209600' },
-    { label: '30 Days', value: '2592000' },
+    { label: "7 Days", value: "604800" },
+    { label: "14 Days", value: "1209600" },
+    { label: "30 Days", value: "2592000" },
   ];
 
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+        <h2 className="text-3xl font-bold bg-linear-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
           Create New Campaign
         </h2>
         <p className="text-muted-foreground mt-2">
@@ -83,24 +89,26 @@ export const CreateCampaignForm = () => {
         </p>
       </div>
 
-      <Card className="border-0 shadow-2xl bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700">
+      <Card className="border-0 shadow-2xl bg-linear-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700">
         <CardHeader className="pb-4">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-blue-500 rounded-2xl flex items-center justify-center">
+            <div className="w-12 h-12 bg-linear-to-br from-emerald-500 to-blue-500 rounded-2xl flex items-center justify-center">
               <Zap className="w-6 h-6 text-white" />
             </div>
             <div>
               <CardTitle className="text-2xl">Campaign Details</CardTitle>
-              <CardDescription>Configure your affiliate program settings</CardDescription>
+              <CardDescription>
+                Configure your affiliate program settings
+              </CardDescription>
             </div>
           </div>
         </CardHeader>
-        
+
         <CardContent>
           <form onSubmit={handleCreateCampaign}>
             <div className="space-y-6">
-              <InputField 
-                label="Campaign Name" 
+              <InputField
+                label="Campaign Name"
                 description="Give your campaign a recognizable name"
                 required
               >
@@ -113,8 +121,8 @@ export const CreateCampaignForm = () => {
               </InputField>
 
               <div className="grid md:grid-cols-2 gap-6">
-                <InputField 
-                  label="Commission Rate" 
+                <InputField
+                  label="Commission Rate"
                   description="Percentage commission for affiliates"
                   required
                 >
@@ -134,8 +142,8 @@ export const CreateCampaignForm = () => {
                   </div>
                 </InputField>
 
-                <InputField 
-                  label="Campaign Budget" 
+                <InputField
+                  label="Campaign Budget"
                   description="Total budget allocated for commissions"
                 >
                   <div className="relative">
@@ -152,8 +160,8 @@ export const CreateCampaignForm = () => {
                 </InputField>
               </div>
 
-              <InputField 
-                label="Payout Clearing Period" 
+              <InputField
+                label="Payout Clearing Period"
                 description="Time before affiliates can claim commissions"
                 required
               >
@@ -163,11 +171,15 @@ export const CreateCampaignForm = () => {
                       <Button
                         key={period.value}
                         type="button"
-                        variant={clearingPeriod === period.value ? "default" : "outline"}
+                        variant={
+                          clearingPeriod === period.value
+                            ? "default"
+                            : "outline"
+                        }
                         className={`flex-1 ${
-                          clearingPeriod === period.value 
-                            ? 'bg-gradient-to-r from-emerald-500 to-blue-500 text-white' 
-                            : 'border-emerald-200 hover:bg-emerald-50'
+                          clearingPeriod === period.value
+                            ? "bg-linear-to-r from-emerald-500 to-blue-500 text-white"
+                            : "border-emerald-200 hover:bg-emerald-50"
                         }`}
                         onClick={() => setClearingPeriod(period.value)}
                       >
@@ -175,7 +187,7 @@ export const CreateCampaignForm = () => {
                       </Button>
                     ))}
                   </div>
-                  
+
                   <div className="relative">
                     <Input
                       type="number"
@@ -191,15 +203,19 @@ export const CreateCampaignForm = () => {
               </InputField>
 
               {/* Summary Card */}
-              <div className="bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 p-4 rounded-xl border border-emerald-200 dark:border-emerald-800">
-                <h4 className="font-semibold text-emerald-700 dark:text-emerald-300 mb-3">Campaign Summary</h4>
+              <div className="bg-linear-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 p-4 rounded-xl border border-emerald-200 dark:border-emerald-800">
+                <h4 className="font-semibold text-emerald-700 dark:text-emerald-300 mb-3">
+                  Campaign Summary
+                </h4>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div className="space-y-2">
                     <div className="flex items-center text-muted-foreground">
                       <Target className="w-4 h-4 mr-2" />
                       Commission Rate
                     </div>
-                    <div className="font-semibold">{commissionRate || '0'}%</div>
+                    <div className="font-semibold">
+                      {commissionRate || "0"}%
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-center text-muted-foreground">
@@ -207,7 +223,10 @@ export const CreateCampaignForm = () => {
                       Clearing Period
                     </div>
                     <div className="font-semibold">
-                      {clearingPeriod ? Math.round(parseInt(clearingPeriod) / 86400) : '0'} days
+                      {clearingPeriod
+                        ? Math.round(parseInt(clearingPeriod) / 86400)
+                        : "0"}{" "}
+                      days
                     </div>
                   </div>
                   <div className="space-y-2">
@@ -215,15 +234,15 @@ export const CreateCampaignForm = () => {
                       <DollarSign className="w-4 h-4 mr-2" />
                       Estimated Budget
                     </div>
-                    <div className="font-semibold">{budget || '0'} BDAG</div>
+                    <div className="font-semibold">{budget || "0"} BDAG</div>
                   </div>
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
-                disabled={isLoading} 
-                className="w-full h-14 bg-gradient-to-r from-emerald-500 to-blue-500 hover:from-emerald-600 hover:to-blue-600 text-white text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full h-14 bg-linear-to-r from-emerald-500 to-blue-500 hover:from-emerald-600 hover:to-blue-600 text-white text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
                 {isLoading ? (
                   <div className="flex items-center space-x-2">
@@ -238,9 +257,9 @@ export const CreateCampaignForm = () => {
                 )}
               </Button>
             </div>
-           </form>
-         </CardContent>
-       </Card>
-     </div>
-   );
- };
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};

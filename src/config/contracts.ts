@@ -3,9 +3,9 @@ export const CONTRACT_ADDRESSES = {
   // REPLACE WITH YOUR ACTUAL DEPLOYED ADDRESSES
   AFFILIATE_FACTORY: "0x573B4bf300b4B5244832fc7A40F64344c999c445",
   BDAG_TOKEN: "0x2477C1Cf9a36845b793602Ac949C8fB15Dd802ef",
-  
+
   // Optional: Add any pre-deployed campaign addresses
-  SAMPLE_CAMPAIGN: "0xYourCampaignAddressHere"
+  SAMPLE_CAMPAIGN: "0xYourCampaignAddressHere",
 };
 
 // BlockDAG Network Configuration
@@ -14,11 +14,11 @@ export const BLOCKDAG_NETWORK = {
   chainName: "BlockDAG Testnet",
   nativeCurrency: {
     name: "BDAG",
-    symbol: "BDAG", 
-    decimals: 18
+    symbol: "BDAG",
+    decimals: 18,
   },
   rpcUrls: ["https://relay.awakening.bdagscan.com"], // Replace with actual RPC
-  blockExplorerUrls: ["https://explorer.blockdag.network"] // Replace with actual explorer
+  blockExplorerUrls: ["https://explorer.blockdag.network"], // Replace with actual explorer
 };
 
 // WalletConnect Configuration
@@ -28,7 +28,6 @@ export const WALLETCONNECT_CONFIG = {
     name: "StormSale",
     description: "Secure Web3 Affiliate Platform on BlockDAG",
     url: "https://yourdomain.com",
-    icons: ["https://yourdomain.com/logo.png"]
-  }
+    icons: ["https://yourdomain.com/logo.png"],
+  },
 };
-

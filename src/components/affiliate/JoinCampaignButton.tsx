@@ -1,12 +1,18 @@
-import { useState } from 'react';
-import { Button } from '../../components/ui/button';
-import { Input } from '../../components/ui/input';
-import { Label } from '../../components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
-import { useWeb3 } from '../../hooks/useWeb3';
+import { useState } from "react";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
+import { useWeb3 } from "../../hooks/useWeb3";
 
 export const JoinCampaignButton = () => {
-  const [campaignAddress, setCampaignAddress] = useState('');
+  const [campaignAddress, setCampaignAddress] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { factoryContract } = useWeb3();
 
@@ -17,11 +23,11 @@ export const JoinCampaignButton = () => {
     try {
       const tx = await factoryContract.joinCampaign(campaignAddress);
       await tx.wait();
-      alert('Successfully joined campaign!');
-      setCampaignAddress('');
+      alert("Successfully joined campaign!");
+      setCampaignAddress("");
     } catch (error) {
-      console.error('Error joining campaign:', error);
-      alert('Error joining campaign');
+      console.error("Error joining campaign:", error);
+      alert("Error joining campaign");
     } finally {
       setIsLoading(false);
     }
@@ -46,12 +52,12 @@ export const JoinCampaignButton = () => {
           />
         </div>
 
-        <Button 
-          onClick={handleJoinCampaign} 
+        <Button
+          onClick={handleJoinCampaign}
           disabled={isLoading || !campaignAddress}
           className="w-full"
         >
-          {isLoading ? 'Joining Campaign...' : 'Join Campaign'}
+          {isLoading ? "Joining Campaign..." : "Join Campaign"}
         </Button>
       </CardContent>
     </Card>

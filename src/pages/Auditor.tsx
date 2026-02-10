@@ -1,19 +1,38 @@
-import { useState } from 'react';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { InputGroup, InputField } from '../components/ui/input-group';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../components/ui/dialog';
-import { ArrowLeft, Eye, Shield, FileSearch, CheckCircle2, XCircle } from 'lucide-react';
-import { useWeb3 } from '../hooks/useWeb3';
-import { useNotification } from '../context/NotificationContext';
+import { useState } from "react";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { InputGroup, InputField } from "../components/ui/input-group";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "../components/ui/dialog";
+import {
+  ArrowLeft,
+  Eye,
+  Shield,
+  FileSearch,
+  CheckCircle2,
+  XCircle,
+} from "lucide-react";
+import { useWeb3 } from "../hooks/useWeb3";
+import { useNotification } from "../context/NotificationContext";
 interface AuditorProps {
   onBack: () => void;
 }
 
 export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
-  const [saleId, setSaleId] = useState('');
-  const [campaignAddress, setCampaignAddress] = useState('');
+  const [saleId, setSaleId] = useState("");
+  const [campaignAddress, setCampaignAddress] = useState("");
   const [hasAccess, setHasAccess] = useState<boolean | null>(null);
   const [isChecking, setIsChecking] = useState(false);
   const { userAddress } = useWeb3();
@@ -22,9 +41,9 @@ export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
   const checkAccess = async () => {
     if (!saleId || !campaignAddress || !userAddress) {
       showNotification({
-        type: 'warning',
-        title: 'Missing Information',
-        message: 'Please fill all required fields'
+        type: "warning",
+        title: "Missing Information",
+        message: "Please fill all required fields",
       });
       return;
     }
@@ -32,23 +51,23 @@ export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
     setIsChecking(true);
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       const hasAccess = Math.random() > 0.3; // 70% success rate for demo
       setHasAccess(hasAccess);
-      
+
       showNotification({
-        type: hasAccess ? 'success' : 'warning',
-        title: hasAccess ? 'Access Granted' : 'Access Denied',
-        message: hasAccess 
-          ? 'You can now view the encrypted sale data' 
-          : 'Request access from advertiser or affiliate'
+        type: hasAccess ? "success" : "warning",
+        title: hasAccess ? "Access Granted" : "Access Denied",
+        message: hasAccess
+          ? "You can now view the encrypted sale data"
+          : "Request access from advertiser or affiliate",
       });
     } catch (error) {
       showNotification({
-        type: 'error',
-        title: 'Check Failed',
-        message: 'Unable to verify access rights'
+        type: "error",
+        title: "Check Failed",
+        message: "Unable to verify access rights",
       });
     } finally {
       setIsChecking(false);
@@ -57,9 +76,9 @@ export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
 
   const requestAccess = () => {
     showNotification({
-      type: 'info',
-      title: 'Access Requested',
-      message: 'Your request has been sent to the parties involved'
+      type: "info",
+      title: "Access Requested",
+      message: "Your request has been sent to the parties involved",
     });
   };
 
@@ -79,7 +98,8 @@ export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
                 Auditor Dashboard
               </h1>
               <p className="text-muted-foreground mt-2">
-                Access encrypted sale data with proper authorization and maintain compliance
+                Access encrypted sale data with proper authorization and
+                maintain compliance
               </p>
             </div>
 
@@ -91,15 +111,17 @@ export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
                   </div>
                   <div>
                     <CardTitle>Verify Access Rights</CardTitle>
-                    <CardDescription>Check your permissions for specific sale data</CardDescription>
+                    <CardDescription>
+                      Check your permissions for specific sale data
+                    </CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
                 <InputGroup>
                   <div className="grid md:grid-cols-2 gap-6">
-                    <InputField 
-                      label="Campaign Address" 
+                    <InputField
+                      label="Campaign Address"
                       description="The campaign contract address"
                       required
                     >
@@ -110,8 +132,8 @@ export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
                       />
                     </InputField>
 
-                    <InputField 
-                      label="Sale ID" 
+                    <InputField
+                      label="Sale ID"
                       description="Unique identifier for the sale"
                       required
                     >
@@ -124,8 +146,8 @@ export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
                     </InputField>
                   </div>
 
-                  <Button 
-                    onClick={checkAccess} 
+                  <Button
+                    onClick={checkAccess}
                     disabled={isChecking}
                     className="w-full h-12 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
                   >
@@ -145,11 +167,13 @@ export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
 
                 {/* Access Result */}
                 {hasAccess !== null && (
-                  <div className={`mt-6 p-6 rounded-xl border-2 ${
-                    hasAccess 
-                      ? 'bg-emerald-50 border-emerald-200 dark:bg-emerald-900/20 dark:border-emerald-800'
-                      : 'bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800'
-                  }`}>
+                  <div
+                    className={`mt-6 p-6 rounded-xl border-2 ${
+                      hasAccess
+                        ? "bg-emerald-50 border-emerald-200 dark:bg-emerald-900/20 dark:border-emerald-800"
+                        : "bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800"
+                    }`}
+                  >
                     <div className="flex items-center space-x-3">
                       {hasAccess ? (
                         <>
@@ -159,7 +183,8 @@ export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
                               Access Granted
                             </h4>
                             <p className="text-sm text-emerald-600 dark:text-emerald-400 mt-1">
-                              You have been granted access to view this encrypted sale data.
+                              You have been granted access to view this
+                              encrypted sale data.
                             </p>
                           </div>
                         </>
@@ -171,15 +196,16 @@ export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
                               Access Denied
                             </h4>
                             <p className="text-sm text-red-600 dark:text-red-400 mt-1">
-                              You don't have permission to access this sale data.
+                              You don't have permission to access this sale
+                              data.
                             </p>
                           </div>
                         </>
                       )}
                     </div>
-                    
+
                     {!hasAccess && (
-                      <Button 
+                      <Button
                         onClick={requestAccess}
                         className="mt-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white"
                       >
@@ -204,14 +230,21 @@ export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
               </CardHeader>
               <CardContent className="space-y-4">
                 {[
-                  { label: 'Audits Completed', value: '47' },
-                  { label: 'Active Requests', value: '3' },
-                  { label: 'Success Rate', value: '98%' },
-                  { label: 'Avg. Response Time', value: '2.3h' },
+                  { label: "Audits Completed", value: "47" },
+                  { label: "Active Requests", value: "3" },
+                  { label: "Success Rate", value: "98%" },
+                  { label: "Avg. Response Time", value: "2.3h" },
                 ].map((stat, index) => (
-                  <div key={index} className="flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">{stat.label}</span>
-                    <span className="font-semibold text-purple-600">{stat.value}</span>
+                  <div
+                    key={index}
+                    className="flex justify-between items-center"
+                  >
+                    <span className="text-sm text-muted-foreground">
+                      {stat.label}
+                    </span>
+                    <span className="font-semibold text-purple-600">
+                      {stat.value}
+                    </span>
                   </div>
                 ))}
               </CardContent>
@@ -224,13 +257,16 @@ export const Auditor: React.FC<AuditorProps> = ({ onBack }) => {
               </CardHeader>
               <CardContent className="space-y-3">
                 {[
-                  'Verify campaign address format',
-                  'Ensure sale ID is valid',
-                  'Check your access permissions',
-                  'Contact parties if access denied',
-                  'Follow compliance protocols',
+                  "Verify campaign address format",
+                  "Ensure sale ID is valid",
+                  "Check your access permissions",
+                  "Contact parties if access denied",
+                  "Follow compliance protocols",
                 ].map((step, index) => (
-                  <div key={index} className="flex items-center space-x-2 text-sm">
+                  <div
+                    key={index}
+                    className="flex items-center space-x-2 text-sm"
+                  >
                     <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
                     <span>{step}</span>
                   </div>

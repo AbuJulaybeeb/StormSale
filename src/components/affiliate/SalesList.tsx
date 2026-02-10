@@ -1,9 +1,28 @@
-import { useState } from 'react';
-import { Button } from '../../components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../components/ui/table';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../../components/ui/dialog';
-import { unwrapAESKey, decryptPayload } from '../../lib/crypto';
+import { useState } from "react";
+import { Button } from "../../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "../../components/ui/dialog";
+import { unwrapAESKey, decryptPayload } from "../../lib/crypto";
 
 interface Sale {
   id: number;
@@ -23,20 +42,20 @@ export const SalesList = () => {
   const mockSales: Sale[] = [
     {
       id: 1,
-      affiliate: '0x1234...5678',
-      saleAmount: '100.0',
-      commissionAmount: '10.0',
+      affiliate: "0x1234...5678",
+      saleAmount: "100.0",
+      commissionAmount: "10.0",
       timestamp: Date.now() / 1000 - 86400, // 1 day ago
-      claimed: false
+      claimed: false,
     },
     {
       id: 2,
-      affiliate: '0x1234...5678',
-      saleAmount: '250.0',
-      commissionAmount: '25.0',
+      affiliate: "0x1234...5678",
+      saleAmount: "250.0",
+      commissionAmount: "25.0",
       timestamp: Date.now() / 1000 - 172800, // 2 days ago
-      claimed: true
-    }
+      claimed: true,
+    },
   ];
 
   const handleDecrypt = async (saleId: number) => {
@@ -48,12 +67,15 @@ export const SalesList = () => {
       // 3. Decrypt 'encryptedPayload' with AES key
       // 4. Display decrypted data in a Shadcn Dialog
 
-      const decrypted = await decryptPayload('STUB_ENCRYPTED_PAYLOAD', {} as CryptoKey);
+      const decrypted = await decryptPayload(
+        "STUB_ENCRYPTED_PAYLOAD",
+        {} as CryptoKey,
+      );
       setDecryptedData(decrypted);
       setIsDialogOpen(true);
     } catch (error) {
-      console.error('Error decrypting data:', error);
-      alert('Error decrypting data');
+      console.error("Error decrypting data:", error);
+      alert("Error decrypting data");
     } finally {
       setIsDecrypting(false);
     }
@@ -92,22 +114,24 @@ export const SalesList = () => {
                   <TableCell>{sale.commissionAmount} BDAG</TableCell>
                   <TableCell>{formatTimestamp(sale.timestamp)}</TableCell>
                   <TableCell>
-                    <span className={`px-2 py-1 rounded-full text-xs ${
-                      sale.claimed 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-yellow-100 text-yellow-800'
-                    }`}>
-                      {sale.claimed ? 'Claimed' : 'Pending'}
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs ${
+                        sale.claimed
+                          ? "bg-green-100 text-green-800"
+                          : "bg-yellow-100 text-yellow-800"
+                      }`}
+                    >
+                      {sale.claimed ? "Claimed" : "Pending"}
                     </span>
                   </TableCell>
                   <TableCell>
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       size="sm"
                       onClick={() => handleDecrypt(sale.id)}
                       disabled={isDecrypting}
                     >
-                      {isDecrypting ? 'Decrypting...' : 'Decrypt'}
+                      {isDecrypting ? "Decrypting..." : "Decrypt"}
                     </Button>
                   </TableCell>
                 </TableRow>

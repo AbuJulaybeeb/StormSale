@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState } from 'react';
-import type { ReactNode } from 'react';
-import { useWeb3 } from './Web3Context';
+import React, { createContext, useContext, useState } from "react";
+import type { ReactNode } from "react";
+import { useWeb3 } from "./Web3Context";
 
 interface WalletConnectState {
   isConnecting: boolean;
@@ -17,13 +17,17 @@ interface WalletConnectContextType extends WalletConnectState {
   setShowNetworkModal: (show: boolean) => void;
 }
 
-const WalletConnectContext = createContext<WalletConnectContextType | undefined>(undefined);
+const WalletConnectContext = createContext<
+  WalletConnectContextType | undefined
+>(undefined);
 
 interface WalletConnectProviderProps {
   children: ReactNode;
 }
 
-export const WalletConnectProvider: React.FC<WalletConnectProviderProps> = ({ children }) => {
+export const WalletConnectProvider: React.FC<WalletConnectProviderProps> = ({
+  children,
+}) => {
   const [state, setState] = useState<WalletConnectState>({
     isConnecting: false,
     isSwitchingNetwork: false,
@@ -40,23 +44,23 @@ export const WalletConnectProvider: React.FC<WalletConnectProviderProps> = ({ ch
   } = useWeb3();
 
   const connect = async (): Promise<void> => {
-    setState(prev => ({ ...prev, isConnecting: true, error: null }));
+    setState((prev) => ({ ...prev, isConnecting: true, error: null }));
 
     try {
       await connectWallet();
-      
+
       // Check if we're on BlockDAG network after connection
       if (isConnected && !isBlockDAGNetwork) {
-        setState(prev => ({ ...prev, showNetworkModal: true }));
+        setState((prev) => ({ ...prev, showNetworkModal: true }));
       }
     } catch (error: any) {
-      console.error('Wallet connection error:', error);
-      setState(prev => ({ 
-        ...prev, 
-        error: error.message || 'Failed to connect wallet' 
+      console.error("Wallet connection error:", error);
+      setState((prev) => ({
+        ...prev,
+        error: error.message || "Failed to connect wallet",
       }));
     } finally {
-      setState(prev => ({ ...prev, isConnecting: false }));
+      setState((prev) => ({ ...prev, isConnecting: false }));
     }
   };
 
@@ -73,39 +77,40 @@ export const WalletConnectProvider: React.FC<WalletConnectProviderProps> = ({ ch
   const ensureBlockDAGNetwork = async (): Promise<boolean> => {
     if (isBlockDAGNetwork) return true;
 
-    setState(prev => ({ ...prev, isSwitchingNetwork: true, error: null }));
+    setState((prev) => ({ ...prev, isSwitchingNetwork: true, error: null }));
 
     try {
       const success = await switchToBlockDAGNetwork();
-      
+
       if (success) {
-        setState(prev => ({ ...prev, showNetworkModal: false }));
+        setState((prev) => ({ ...prev, showNetworkModal: false }));
         return true;
       } else {
-        setState(prev => ({ 
-          ...prev, 
-          error: 'Failed to switch to BlockDAG network. Please switch manually.' 
+        setState((prev) => ({
+          ...prev,
+          error:
+            "Failed to switch to BlockDAG network. Please switch manually.",
         }));
         return false;
       }
     } catch (error: any) {
-      console.error('Network switch error:', error);
-      setState(prev => ({ 
-        ...prev, 
-        error: error.message || 'Failed to switch network' 
+      console.error("Network switch error:", error);
+      setState((prev) => ({
+        ...prev,
+        error: error.message || "Failed to switch network",
       }));
       return false;
     } finally {
-      setState(prev => ({ ...prev, isSwitchingNetwork: false }));
+      setState((prev) => ({ ...prev, isSwitchingNetwork: false }));
     }
   };
 
   const clearError = (): void => {
-    setState(prev => ({ ...prev, error: null }));
+    setState((prev) => ({ ...prev, error: null }));
   };
 
   const setShowNetworkModal = (show: boolean): void => {
-    setState(prev => ({ ...prev, showNetworkModal: show }));
+    setState((prev) => ({ ...prev, showNetworkModal: show }));
   };
 
   const contextValue: WalletConnectContextType = {
@@ -127,7 +132,9 @@ export const WalletConnectProvider: React.FC<WalletConnectProviderProps> = ({ ch
 export const useWalletConnect = (): WalletConnectContextType => {
   const context = useContext(WalletConnectContext);
   if (context === undefined) {
-    throw new Error('useWalletConnect must be used within a WalletConnectProvider');
+    throw new Error(
+      "useWalletConnect must be used within a WalletConnectProvider",
+    );
   }
   return context;
 };
