@@ -25,7 +25,7 @@ export const ConnectWallet = () => {
   if (isConnected) {
     return (
       <div className="flex items-center space-x-2">
-        <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+        <div className="w-2 h-2 bg-indigo-600 rounded-full"></div>
         <span className="text-sm font-medium">
           {formatAddress(userAddress!)}
         </span>
@@ -38,7 +38,7 @@ export const ConnectWallet = () => {
       <Button
         onClick={() => handleConnect("metamask")}
         disabled={isConnecting}
-        className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700 text-white"
+        className="bg-gradient-to-r from-slate-800 to-slate-900 dark:from-indigo-600 dark:to-indigo-700 hover:from-slate-900 hover:to-slate-950 dark:hover:from-indigo-700 dark:hover:to-indigo-800 text-white"
       >
         <Wallet className="w-4 h-4 mr-2" />
         {isConnecting ? "Connecting..." : "Connect Wallet"}
@@ -48,7 +48,7 @@ export const ConnectWallet = () => {
         variant="outline"
         onClick={() => handleConnect("walletconnect")}
         disabled={isConnecting}
-        className="border-emerald-200 hover:bg-emerald-50 dark:border-emerald-800 dark:hover:bg-emerald-900"
+        className="border-slate-200 dark:border-slate-800 hover:bg-indigo-600 dark:border-slate-200 dark:border-slate-800 dark:hover:bg-indigo-600"
       >
         <ExternalLink className="w-4 h-4 mr-2" />
         WalletConnect

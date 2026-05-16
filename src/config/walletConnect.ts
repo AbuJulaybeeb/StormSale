@@ -9,14 +9,13 @@ export const walletConnectConfig = {
 };
 
 export const CHAINS = {
-  // Add BlockDAG chain configuration
   blockdag: {
-    id: 1043, // Replace with actual BlockDAG chain ID
+    id: 1046,
     name: "BlockDAG",
     currency: "BDAG",
-    rpcUrl: "https://rpc.awakening.bdagscan.com/", // Replace with actual RPC URL
+    rpcUrl: "https://relay.awakening.bdagscan.com",
+    blockExplorer: "https://explorer.blockdag.network",
   },
-  // You can add other chains as needed
   ethereum: {
     id: 1,
     name: "Ethereum",

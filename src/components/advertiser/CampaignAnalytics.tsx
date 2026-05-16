@@ -88,29 +88,28 @@ export const CampaignAnalytics = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center bg-white dark:bg-zinc-900/50 p-6 md:p-8 rounded-3xl border border-slate-200 dark:border-zinc-800 shadow-sm">
         <div>
-          <h1 className="text-3xl font-bold bg-linear-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+          <h1 className="text-2xl md:text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
             Campaign Analytics
           </h1>
-          <p className="text-muted-foreground mt-2">
-            Track performance, monitor revenue, and optimize your affiliate
-            campaigns
+          <p className="text-zinc-500 dark:text-zinc-400 mt-2 font-medium">
+            Track performance, monitor revenue, and optimize your affiliate campaigns
           </p>
         </div>
-        <div className="flex space-x-3 mt-4 lg:mt-0">
+        <div className="flex space-x-3 mt-6 lg:mt-0">
           <Button
             variant="outline"
-            className="border-emerald-200 hover:bg-emerald-50"
+            className="h-12 border-slate-200 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl"
           >
             <Calendar className="w-4 h-4 mr-2" />
             Last 30 Days
           </Button>
-          <Button className="bg-linear-to-r from-emerald-500 to-blue-500 text-white">
+          <Button className="h-12 bg-zinc-900 hover:bg-zinc-800 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white rounded-xl shadow-md transition-all">
             <Download className="w-4 h-4 mr-2" />
-            Export Report
+            Export
           </Button>
         </div>
       </div>
@@ -122,21 +121,21 @@ export const CampaignAnalytics = () => {
           return (
             <Card
               key={index}
-              className="bg-white dark:bg-gray-800 shadow-lg border-0 hover:shadow-xl transition-shadow duration-300"
+              className="bg-white dark:bg-zinc-900/80 shadow-sm border border-slate-200 dark:border-zinc-800 hover:shadow-md transition-shadow rounded-2xl"
             >
               <CardContent className="p-6">
-                <div className="flex items-center justify-between">
+                <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">
+                    <p className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                       {metric.label}
                     </p>
-                    <p className="text-2xl font-bold mt-1">{metric.value}</p>
-                    <p className="text-sm text-emerald-600 font-semibold mt-1">
+                    <p className="text-2xl font-extrabold text-zinc-900 dark:text-white mt-2 mb-1">{metric.value}</p>
+                    <p className="text-xs font-medium text-indigo-600 dark:text-indigo-400">
                       {metric.change}
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-linear-to-br from-emerald-500 to-blue-500 rounded-xl flex items-center justify-center">
-                    <IconComponent className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 bg-slate-100 dark:bg-zinc-800 rounded-xl flex items-center justify-center border border-slate-200 dark:border-zinc-700">
+                    <IconComponent className="w-5 h-5 text-zinc-900 dark:text-indigo-400" />
                   </div>
                 </div>
               </CardContent>
@@ -148,38 +147,37 @@ export const CampaignAnalytics = () => {
       {/* Two Column Layout */}
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Campaign Performance */}
-        <Card className="border-0 shadow-lg">
-          <CardHeader>
-            <CardTitle>Campaign Performance</CardTitle>
-            <CardDescription>
+        <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
+          <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
+            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Campaign Performance</CardTitle>
+            <CardDescription className="text-zinc-500 dark:text-zinc-400">
               Revenue and sales across all your campaigns
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             <div className="space-y-4">
               {campaignStats.map((campaign, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl"
+                  className="flex items-center justify-between p-4 bg-slate-50 dark:bg-zinc-950/50 border border-slate-100 dark:border-zinc-800/50 rounded-xl hover:border-slate-200 dark:hover:border-zinc-700 transition-colors"
                 >
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-linear-to-br from-emerald-500 to-blue-500 rounded-xl flex items-center justify-center">
-                      <BarChart3 className="w-6 h-6 text-white" />
+                    <div className="w-10 h-10 bg-indigo-50 dark:bg-indigo-500/10 rounded-xl flex items-center justify-center border border-indigo-100 dark:border-indigo-500/20">
+                      <BarChart3 className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                     </div>
                     <div>
-                      <div className="font-semibold">{campaign.name}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {campaign.affiliates} affiliates • {campaign.sales}{" "}
-                        sales
+                      <div className="font-bold text-sm text-zinc-900 dark:text-white">{campaign.name}</div>
+                      <div className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-1">
+                        {campaign.affiliates} affiliates • {campaign.sales} sales
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-bold text-emerald-600">
+                    <div className="font-bold text-sm text-zinc-900 dark:text-white">
                       ${campaign.revenue.toLocaleString()}
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                      ${campaign.commissions.toLocaleString()} commissions
+                    <div className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-1">
+                      ${campaign.commissions.toLocaleString()} comms
                     </div>
                   </div>
                 </div>
@@ -189,43 +187,43 @@ export const CampaignAnalytics = () => {
         </Card>
 
         {/* Top Performers */}
-        <Card className="border-0 shadow-lg">
-          <CardHeader>
-            <CardTitle>Top Affiliates</CardTitle>
-            <CardDescription>
+        <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
+          <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
+            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Top Affiliates</CardTitle>
+            <CardDescription className="text-zinc-500 dark:text-zinc-400">
               Your highest performing affiliates
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             <div className="space-y-4">
               {topAffiliates.map((affiliate, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between p-4 bg-linear-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 rounded-xl"
+                  className="flex items-center justify-between p-4 bg-slate-50 dark:bg-zinc-950/50 border border-slate-100 dark:border-zinc-800/50 rounded-xl hover:border-slate-200 dark:hover:border-zinc-700 transition-colors"
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-linear-to-br from-emerald-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                    <div className="w-10 h-10 bg-zinc-900 dark:bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm">
                       {affiliate.name
                         .split(" ")
                         .map((n) => n[0])
                         .join("")}
                     </div>
                     <div>
-                      <div className="font-semibold">{affiliate.name}</div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="font-bold text-sm text-zinc-900 dark:text-white">{affiliate.name}</div>
+                      <div className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-1">
                         {affiliate.sales} sales
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-bold text-emerald-600">
+                    <div className="font-bold text-sm text-zinc-900 dark:text-white mb-1">
                       {affiliate.commission}
                     </div>
                     <div
-                      className={`text-xs font-semibold px-2 py-1 rounded-full ${
+                      className={`text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full inline-block ${
                         affiliate.performance === "Excellent"
-                          ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300"
-                          : "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
+                          ? "bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-400"
+                          : "bg-slate-200 text-slate-700 dark:bg-zinc-800 dark:text-zinc-300"
                       }`}
                     >
                       {affiliate.performance}
@@ -236,7 +234,7 @@ export const CampaignAnalytics = () => {
             </div>
             <Button
               variant="ghost"
-              className="w-full mt-4 text-emerald-600 hover:text-emerald-700"
+              className="w-full mt-6 text-indigo-600 dark:text-indigo-400 font-semibold hover:bg-slate-50 dark:hover:bg-zinc-900/50"
             >
               View All Affiliates
               <Eye className="w-4 h-4 ml-2" />
@@ -246,22 +244,19 @@ export const CampaignAnalytics = () => {
       </div>
 
       {/* Revenue Chart Placeholder */}
-      <Card className="border-0 shadow-lg">
-        <CardHeader>
-          <CardTitle>Revenue Trends</CardTitle>
-          <CardDescription>
+      <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
+        <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
+          <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Revenue Trends</CardTitle>
+          <CardDescription className="text-zinc-500 dark:text-zinc-400">
             Monthly revenue performance over time
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="h-64 bg-linear-to-br from-emerald-50 to-blue-50 dark:from-emerald-900/10 dark:to-blue-900/10 rounded-xl flex items-center justify-center">
+        <CardContent className="pt-6">
+          <div className="h-64 bg-slate-50 dark:bg-zinc-950/50 border border-slate-100 dark:border-zinc-800/50 rounded-xl flex items-center justify-center">
             <div className="text-center">
-              <BarChart3 className="w-12 h-12 text-emerald-400 mx-auto mb-4 opacity-50" />
-              <p className="text-muted-foreground">
-                Revenue chart visualization
-              </p>
-              <p className="text-sm text-muted-foreground mt-1">
-                Interactive chart will be implemented here
+              <BarChart3 className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mx-auto mb-4" />
+              <p className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">
+                Revenue visualization goes here
               </p>
             </div>
           </div>
@@ -270,29 +265,32 @@ export const CampaignAnalytics = () => {
 
       {/* Quick Insights */}
       <div className="grid md:grid-cols-3 gap-6">
-        <Card className="border-0 shadow-lg bg-linear-to-br from-emerald-500 to-blue-500 text-white">
+        <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm bg-white dark:bg-zinc-900/80 rounded-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
           <CardContent className="p-6">
-            <div className="text-2xl font-bold mb-2">32%</div>
-            <div className="text-sm opacity-90">
-              Higher conversion rate than industry average
+            <div className="text-3xl font-extrabold text-zinc-900 dark:text-white mb-2">32%</div>
+            <div className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+              Above Industry Average Conv. Rate
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg bg-linear-to-br from-purple-500 to-pink-500 text-white">
+        <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm bg-white dark:bg-zinc-900/80 rounded-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-1 h-full bg-violet-500"></div>
           <CardContent className="p-6">
-            <div className="text-2xl font-bold mb-2">18%</div>
-            <div className="text-sm opacity-90">
-              Month-over-month growth in affiliate signups
+            <div className="text-3xl font-extrabold text-zinc-900 dark:text-white mb-2">18%</div>
+            <div className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+              MoM Affiliate Growth
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg bg-linear-to-br from-orange-500 to-red-500 text-white">
+        <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm bg-white dark:bg-zinc-900/80 rounded-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
           <CardContent className="p-6">
-            <div className="text-2xl font-bold mb-2">94%</div>
-            <div className="text-sm opacity-90">
-              Affiliate retention rate this quarter
+            <div className="text-3xl font-extrabold text-zinc-900 dark:text-white mb-2">94%</div>
+            <div className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+              Quarterly Retention Rate
             </div>
           </CardContent>
         </Card>

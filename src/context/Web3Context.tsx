@@ -1,4 +1,4 @@
-import React, {
+import {
   createContext,
   useContext,
   useEffect,
@@ -6,10 +6,10 @@ import React, {
   useRef,
 } from "react";
 import type { ReactNode } from "react";
-import { ethers, type AbstractProvider } from "ethers";
+import { ethers } from "ethers";
 import { EthereumProvider } from "@walletconnect/ethereum-provider";
 import { walletConnectConfig, CHAINS } from "../config/walletConnect";
-import { useNotification } from "./NotificationContext";
+import { registerUser } from "../utils/api";
 
 // Replace inline ABI arrays with imports from ABI JSON files in the same folder.
 // Update filenames below if your ABI files are named differently (e.g. './Factory.json', './factoryABI.json', './Campaign.json', etc).
@@ -36,14 +36,18 @@ interface Web3ContextType {
   provider: ethers.BrowserProvider | null;
   signer: ethers.Signer | null;
   userAddress: string | null;
+  userRole: string | null;
   factoryContract: ethers.Contract | null;
   campaignContracts: Map<string, ethers.Contract>;
   connectWallet: (
     connectorType?: "metamask" | "walletconnect",
   ) => Promise<void>;
   disconnectWallet: () => void;
+  updateUserRole: (role: string) => Promise<void>;
   getCampaignContract: (address: string) => ethers.Contract;
+  switchToBlockDAGNetwork: () => Promise<boolean>;
   isConnected: boolean;
+  isBlockDAGNetwork: boolean;
   connectorType: "metamask" | "walletconnect" | null;
 }
 
@@ -53,93 +57,18 @@ const Web3Context = createContext<Web3ContextType | undefined>(undefined);
 // TODO: Add your deployed contract address and ABI
 const FACTORY_ADDRESS = "0x573B4bf300b4B5244832fc7A40F64344c999c445";
 
-// Using CAMPAIGN_ABI imported from '../context/Campaign.json' above; remove the inline ABI array to avoid redeclaration.
-
-// Increaseable timeout for relay WS reachability test (ms)
-const RELAY_WS_TEST_TIMEOUT = 10000; // was 3000
-
-// lightweight WS reachability test
-const testRelayWebSocket = (
-  url: string,
-  timeout = RELAY_WS_TEST_TIMEOUT,
-): Promise<boolean> => {
-  return new Promise((resolve) => {
-    if (typeof window === "undefined" || !("WebSocket" in window)) {
-      // cannot test; assume reachable so init proceeds (we'll still handle errors later)
-      return resolve(true);
-    }
-
-    let ws: WebSocket | null = null;
-    let timer: any = null;
-    let opened = false;
-    let settled = false; // ensure cleanup only resolves once
-
-    try {
-      ws = new WebSocket(url);
-    } catch (err) {
-      // Instantiation failure -> unreachable
-      (window as any).__STORMSALE_WC_LAST_ERR__ = err;
-      return resolve(false);
-    }
-
-    const cleanup = (result: boolean, info?: any) => {
-      if (settled) return;
-      settled = true;
-      if (timer) clearTimeout(timer);
-      try {
-        ws?.close();
-      } catch {}
-      ws = null;
-      if (!result && info) {
-        // store last error for debugging but avoid noisy logs for pre-open failures
-        (window as any).__STORMSALE_WC_LAST_ERR__ = info;
-      }
-      resolve(result);
-    };
-
-    // If we don't see onopen within the timeout treat as unreachable
-    timer = setTimeout(() => {
-      // timeout -> treat as unreachable
-      cleanup(false, new Error("WebSocket test timed out"));
-    }, timeout);
-
-    ws.onopen = () => {
-      opened = true;
-      cleanup(true);
-    };
-
-    ws.onerror = (e) => {
-      // Only log warning if the connection had previously opened.
-      if (opened) {
-        console.warn("WebSocket test error after open:", e);
-      }
-      // In all cases treat as unreachable
-      cleanup(false, e);
-    };
-
-    // Explicitly handle close events. If the socket closes before onopen, treat as failure.
-    ws.onclose = (e) => {
-      if (!opened) {
-        // closed before open: likely server rejected handshake — don't spam console
-        cleanup(false, e);
-      } else {
-        // Closed after open: treat as reachable for the purpose of init check (open succeeded)
-        cleanup(true);
-      }
-    };
-  });
-};
-
 export function Web3Provider({ children }: { children: ReactNode }) {
   const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
   const [signer, setSigner] = useState<ethers.Signer | null>(null);
   const [userAddress, setUserAddress] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
   const [factoryContract, setFactoryContract] =
     useState<ethers.Contract | null>(null);
   const [campaignContracts, setCampaignContracts] = useState<
     Map<string, ethers.Contract>
   >(new Map());
   const [isConnected, setIsConnected] = useState(false);
+  const [isBlockDAGNetwork, setIsBlockDAGNetwork] = useState(false);
   const [connectorType, setConnectorType] = useState<
     "metamask" | "walletconnect" | null
   >(null);
@@ -149,11 +78,6 @@ export function Web3Provider({ children }: { children: ReactNode }) {
   const wcConnectingRef = useRef(false); // <- added: prevents concurrent connect() calls
 
   // Notification helper
-  const { showNotification } = useNotification?.() || {
-    showNotification: undefined,
-  };
-  const MAX_WC_RETRIES = 5;
-
   // Initialize WalletConnect (guarded to avoid double Init() calls)
   useEffect(
     () => {
@@ -194,16 +118,20 @@ export function Web3Provider({ children }: { children: ReactNode }) {
 
           // attach events only once
           if (!(provider as any).__stormsale_events_attached) {
-            provider.on("accountsChanged", (accounts: string[]) => {
-              if (accounts.length === 0) {
-                disconnectWallet();
-              } else {
-                setUserAddress(accounts[0]);
-              }
-            });
+              provider.on("accountsChanged", (accounts: string[]) => {
+                if (accounts.length === 0) {
+                  disconnectWallet();
+                } else {
+                  setUserAddress(accounts[0]);
+                  registerUser(accounts[0]).then(user => {
+                    if (user && user.role) setUserRole(user.role);
+                  }).catch(console.error);
+                }
+              });
 
             provider.on("chainChanged", (chainId: string) => {
               console.log("Chain changed:", chainId);
+              setIsBlockDAGNetwork(parseInt(chainId, 16) === CHAINS.blockdag.id);
             });
 
             provider.on("disconnect", () => {
@@ -256,6 +184,10 @@ export function Web3Provider({ children }: { children: ReactNode }) {
       setIsConnected(true);
       setConnectorType("metamask");
 
+      registerUser(address).then(user => {
+        if (user && user.role) setUserRole(user.role);
+      }).catch(console.error);
+
       // Load contracts after connection
       await loadContracts(newSigner);
     } else {
@@ -297,6 +229,10 @@ export function Web3Provider({ children }: { children: ReactNode }) {
           setIsConnected(true);
           setConnectorType("walletconnect");
 
+          registerUser(address).then(user => {
+            if (user && user.role) setUserRole(user.role);
+          }).catch(console.error);
+
           await loadContracts(newSigner);
         }
         return;
@@ -331,6 +267,10 @@ export function Web3Provider({ children }: { children: ReactNode }) {
         setIsConnected(true);
         setConnectorType("walletconnect");
 
+        registerUser(address).then(user => {
+          if (user && user.role) setUserRole(user.role);
+        }).catch(console.error);
+
         await loadContracts(newSigner);
       }
     } catch (error) {
@@ -358,6 +298,19 @@ export function Web3Provider({ children }: { children: ReactNode }) {
     setCampaignContracts(new Map());
     setIsConnected(false);
     setConnectorType(null);
+    setUserRole(null);
+  };
+
+  const updateUserRole = async (role: string) => {
+    if (!userAddress) return;
+    try {
+      const user = await registerUser(userAddress, role);
+      if (user && user.role) {
+        setUserRole(user.role);
+      }
+    } catch (error) {
+      console.error("Failed to update user role:", error);
+    }
   };
 
   const loadContracts = async (currentSigner: ethers.Signer) => {
@@ -418,18 +371,50 @@ export function Web3Provider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  const switchToBlockDAGNetwork = async () => {
+    try {
+      if (typeof window.ethereum !== "undefined") {
+        await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: `0x${CHAINS.blockdag.id.toString(16)}`,
+              chainName: CHAINS.blockdag.name,
+              rpcUrls: [CHAINS.blockdag.rpcUrl],
+              blockExplorerUrls: [CHAINS.blockdag.blockExplorer],
+              nativeCurrency: {
+                name: "BDAG",
+                symbol: "BDAG",
+                decimals: 18,
+              },
+            },
+          ],
+        });
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error switching network:", error);
+      return false;
+    }
+  };
+
   return (
     <Web3Context.Provider
       value={{
         provider,
         signer,
         userAddress,
+        userRole,
         factoryContract,
         campaignContracts,
         connectWallet,
         disconnectWallet,
+        updateUserRole,
         getCampaignContract,
+        switchToBlockDAGNetwork,
         isConnected,
+        isBlockDAGNetwork,
         connectorType,
       }}
     >

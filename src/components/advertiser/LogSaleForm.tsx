@@ -49,11 +49,8 @@ export const LogSaleForm = () => {
         message: "Securing sale information...",
       });
 
-      // TODO: Implement client-side encryption
-      // 1. Generate new AES symmetric key
       const aesKey = await generateAESKey();
 
-      // 2. Encrypt payload with AES key
       const payload = {
         customer: customerData || "Anonymous Customer",
         saleId: `SALE_${Date.now()}`,
@@ -63,17 +60,13 @@ export const LogSaleForm = () => {
       };
       const encryptedPayload = await encryptPayload(payload, aesKey);
 
-      // 3. Get Advertiser & Affiliate Public Keys
       const advertiserPublicKey = await getPublicKeyForAddress(userAddress!);
       const affiliatePublicKey = await getPublicKeyForAddress(affiliateAddress);
 
-      // 4. Wrap AES key for Advertiser
       const advertiserWrappedKey = await wrapAESKey(
         aesKey,
         advertiserPublicKey,
       );
-
-      // 5. Wrap AES key for Affiliate
       const affiliateWrappedKey = await wrapAESKey(aesKey, affiliatePublicKey);
 
       showNotification({
@@ -82,14 +75,13 @@ export const LogSaleForm = () => {
         message: "Logging encrypted sale...",
       });
 
-      // Call Campaign.logEncryptedSale(...) with all 5 pieces of data
       const tx = await campaignContract.logEncryptedSale(
         affiliateAddress,
         saleAmount,
         encryptedPayload,
         advertiserWrappedKey,
         affiliateWrappedKey,
-        { value: saleAmount }, // Assuming BDAG token handling
+        { value: saleAmount }, 
       );
 
       await tx.wait();
@@ -100,7 +92,6 @@ export const LogSaleForm = () => {
         message: "Encrypted sale data has been recorded on-chain",
       });
 
-      // Reset form
       setAffiliateAddress("");
       setSaleAmount("");
       setCampaignAddress("");
@@ -120,32 +111,32 @@ export const LogSaleForm = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold bg-linear-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+        <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
           Log Encrypted Sale
         </h2>
-        <p className="text-muted-foreground mt-2">
+        <p className="text-zinc-500 dark:text-zinc-400 mt-2 font-medium">
           Record a new sale with military-grade encryption and commission escrow
         </p>
       </div>
 
-      <Card className="border-0 shadow-2xl bg-linear-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700">
-        <CardHeader className="pb-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-linear-to-br from-emerald-500 to-blue-500 rounded-2xl flex items-center justify-center">
-              <Shield className="w-6 h-6 text-white" />
+      <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-3xl bg-white dark:bg-zinc-900/50">
+        <CardHeader className="pb-6 pt-8 px-8">
+          <div className="flex items-center space-x-4">
+            <div className="w-14 h-14 bg-zinc-900 dark:bg-indigo-600 rounded-xl flex items-center justify-center shadow-md">
+              <Shield className="w-7 h-7 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl">Secure Sale Logging</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">Secure Sale Logging</CardTitle>
+              <CardDescription className="text-zinc-500 dark:text-zinc-400 mt-1">
                 All data is encrypted before being stored on-chain
               </CardDescription>
             </div>
           </div>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="px-8 pb-8">
           <form onSubmit={handleLogSale}>
-            <InputGroup className="space-y-6">
+            <InputGroup className="space-y-8">
               <InputField
                 label="Campaign Address"
                 description="The campaign contract where this sale belongs"
@@ -155,6 +146,7 @@ export const LogSaleForm = () => {
                   value={campaignAddress}
                   onChange={(e) => setCampaignAddress(e.target.value)}
                   placeholder="0x742d35Cc6634C0532925a3b8..."
+                  className="h-12 border-slate-200 dark:border-zinc-800 focus:ring-indigo-600 dark:focus:ring-indigo-500 rounded-xl bg-slate-50 dark:bg-zinc-950"
                   required
                 />
               </InputField>
@@ -169,6 +161,7 @@ export const LogSaleForm = () => {
                     value={affiliateAddress}
                     onChange={(e) => setAffiliateAddress(e.target.value)}
                     placeholder="0x..."
+                    className="h-12 border-slate-200 dark:border-zinc-800 focus:ring-indigo-600 dark:focus:ring-indigo-500 rounded-xl bg-slate-50 dark:bg-zinc-950"
                     required
                   />
                 </InputField>
@@ -186,9 +179,10 @@ export const LogSaleForm = () => {
                       value={saleAmount}
                       onChange={(e) => setSaleAmount(e.target.value)}
                       placeholder="e.g., 100.50"
+                      className="h-12 border-slate-200 dark:border-zinc-800 focus:ring-indigo-600 dark:focus:ring-indigo-500 rounded-xl bg-slate-50 dark:bg-zinc-950"
                       required
                     />
-                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-zinc-400 font-medium">
                       BDAG
                     </div>
                   </div>
@@ -203,16 +197,17 @@ export const LogSaleForm = () => {
                   value={customerData}
                   onChange={(e) => setCustomerData(e.target.value)}
                   placeholder="Customer name, email, or reference ID"
+                  className="h-12 border-slate-200 dark:border-zinc-800 focus:ring-indigo-600 dark:focus:ring-indigo-500 rounded-xl bg-slate-50 dark:bg-zinc-950"
                 />
               </InputField>
 
               {/* Encryption Flow Visualization */}
-              <div className="bg-linear-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 p-6 rounded-xl border border-emerald-200 dark:border-emerald-800">
-                <h4 className="font-semibold text-emerald-700 dark:text-emerald-300 mb-4 flex items-center">
-                  <FileKey className="w-5 h-5 mr-2" />
+              <div className="bg-slate-50 dark:bg-zinc-950/50 p-6 rounded-2xl border border-slate-100 dark:border-zinc-800/50">
+                <h4 className="font-bold text-zinc-900 dark:text-white uppercase tracking-wider text-xs mb-6 flex items-center">
+                  <FileKey className="w-4 h-4 mr-2 text-indigo-500" />
                   Encryption Security Flow
                 </h4>
-                <div className="grid md:grid-cols-5 gap-4 text-center">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
                   {[
                     { step: "1", label: "Generate AES Key", icon: Zap },
                     { step: "2", label: "Encrypt Data", icon: Shield },
@@ -223,11 +218,11 @@ export const LogSaleForm = () => {
                     const IconComponent = item.icon;
                     return (
                       <div key={index} className="flex flex-col items-center">
-                        <div className="w-10 h-10 bg-emerald-500 text-white rounded-full flex items-center justify-center text-sm font-bold mb-2">
+                        <div className="w-10 h-10 bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-400 rounded-full flex items-center justify-center text-sm font-bold mb-3 border border-indigo-200 dark:border-indigo-500/30">
                           {item.step}
                         </div>
-                        <IconComponent className="w-4 h-4 text-emerald-600 mb-1" />
-                        <div className="text-xs text-muted-foreground">
+                        <IconComponent className="w-5 h-5 text-zinc-400 dark:text-zinc-500 mb-2" />
+                        <div className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">
                           {item.label}
                         </div>
                       </div>
@@ -239,11 +234,11 @@ export const LogSaleForm = () => {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-14 bg-linear-to-r from-emerald-500 to-blue-500 hover:from-emerald-600 hover:to-blue-600 text-white text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="w-full h-14 bg-zinc-900 hover:bg-zinc-800 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white text-lg font-bold shadow-lg rounded-xl transition-all"
               >
                 {isLoading ? (
-                  <div className="flex items-center space-x-2">
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <div className="flex items-center space-x-3">
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     <span>Logging Encrypted Sale...</span>
                   </div>
                 ) : (

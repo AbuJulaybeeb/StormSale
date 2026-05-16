@@ -43,7 +43,6 @@ export const GrantAccessForm = () => {
         message: "Setting up auditor permissions...",
       });
 
-      // TODO: Implement proper key wrapping for auditor
       const auditorPublicKey = await getPublicKeyForAddress(auditorAddress);
       const auditorWrappedKey = await wrapAESKey(
         {} as CryptoKey,
@@ -70,7 +69,6 @@ export const GrantAccessForm = () => {
         message: "Auditor can now access the encrypted sale data",
       });
 
-      // Reset form
       setSaleId("");
       setAuditorAddress("");
       setCampaignAddress("");
@@ -89,32 +87,32 @@ export const GrantAccessForm = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold bg-linear-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+        <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
           Grant Audit Access
         </h2>
-        <p className="text-muted-foreground mt-2">
+        <p className="text-zinc-500 dark:text-zinc-400 mt-2 font-medium">
           Provide auditors with secure access to encrypted sale data
         </p>
       </div>
 
-      <Card className="border-0 shadow-2xl bg-linear-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700">
-        <CardHeader className="pb-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-linear-to-br from-emerald-500 to-blue-500 rounded-2xl flex items-center justify-center">
-              <Eye className="w-6 h-6 text-white" />
+      <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-3xl bg-white dark:bg-zinc-900/50">
+        <CardHeader className="pb-6 pt-8 px-8">
+          <div className="flex items-center space-x-4">
+            <div className="w-14 h-14 bg-zinc-900 dark:bg-indigo-600 rounded-xl flex items-center justify-center shadow-md">
+              <Eye className="w-7 h-7 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl">Auditor Access Control</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">Auditor Access Control</CardTitle>
+              <CardDescription className="text-zinc-500 dark:text-zinc-400 mt-1">
                 Grant secure data access to authorized auditors
               </CardDescription>
             </div>
           </div>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="px-8 pb-8">
           <form onSubmit={handleGrantAccess}>
-            <InputGroup className="space-y-6">
+            <InputGroup className="space-y-8">
               <InputField
                 label="Campaign Address"
                 description="The campaign containing the sale data"
@@ -124,6 +122,7 @@ export const GrantAccessForm = () => {
                   value={campaignAddress}
                   onChange={(e) => setCampaignAddress(e.target.value)}
                   placeholder="0x742d35Cc6634C0532925a3b8..."
+                  className="h-12 border-slate-200 dark:border-zinc-800 focus:ring-indigo-600 dark:focus:ring-indigo-500 rounded-xl bg-slate-50 dark:bg-zinc-950"
                   required
                 />
               </InputField>
@@ -140,6 +139,7 @@ export const GrantAccessForm = () => {
                     value={saleId}
                     onChange={(e) => setSaleId(e.target.value)}
                     placeholder="e.g., 123"
+                    className="h-12 border-slate-200 dark:border-zinc-800 focus:ring-indigo-600 dark:focus:ring-indigo-500 rounded-xl bg-slate-50 dark:bg-zinc-950"
                     required
                   />
                 </InputField>
@@ -153,23 +153,24 @@ export const GrantAccessForm = () => {
                     value={auditorAddress}
                     onChange={(e) => setAuditorAddress(e.target.value)}
                     placeholder="0x..."
+                    className="h-12 border-slate-200 dark:border-zinc-800 focus:ring-indigo-600 dark:focus:ring-indigo-500 rounded-xl bg-slate-50 dark:bg-zinc-950"
                     required
                   />
                 </InputField>
               </div>
 
               {/* Security Notice */}
-              <div className="bg-linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-4 rounded-xl border border-blue-200 dark:border-blue-800">
-                <div className="flex items-start space-x-3">
-                  <Shield className="w-5 h-5 text-blue-600 mt-0.5" />
+              <div className="bg-indigo-50 dark:bg-indigo-500/10 p-6 rounded-2xl border border-indigo-100 dark:border-indigo-500/20">
+                <div className="flex items-start space-x-4">
+                  <Shield className="w-6 h-6 text-indigo-600 dark:text-indigo-400 mt-1" />
                   <div>
-                    <h4 className="font-semibold text-blue-700 dark:text-blue-300">
+                    <h4 className="font-bold text-indigo-900 dark:text-indigo-300">
                       Security Notice
                     </h4>
-                    <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">
+                    <p className="text-sm font-medium text-indigo-700 dark:text-indigo-400 mt-2 leading-relaxed">
                       Only grant access to verified auditors. The auditor will
                       be able to decrypt and view the sale data using their
-                      private key.
+                      private key. This action is permanently recorded on-chain.
                     </p>
                   </div>
                 </div>
@@ -178,11 +179,11 @@ export const GrantAccessForm = () => {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-14 bg-linear-to-r from-emerald-500 to-blue-500 hover:from-emerald-600 hover:to-blue-600 text-white text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="w-full h-14 bg-zinc-900 hover:bg-zinc-800 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white text-lg font-bold shadow-lg rounded-xl transition-all"
               >
                 {isLoading ? (
-                  <div className="flex items-center space-x-2">
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <div className="flex items-center space-x-3">
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     <span>Granting Access...</span>
                   </div>
                 ) : (

@@ -55,7 +55,6 @@ export const CreateCampaignForm = () => {
         message: "Your affiliate campaign is now live",
       });
 
-      // Reset form
       setCommissionRate("");
       setClearingPeriod("");
       setCampaignName("");
@@ -81,32 +80,32 @@ export const CreateCampaignForm = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold bg-linear-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+        <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
           Create New Campaign
         </h2>
-        <p className="text-muted-foreground mt-2">
+        <p className="text-zinc-500 dark:text-zinc-400 mt-2 font-medium">
           Set up a new affiliate campaign with commission rates and payout terms
         </p>
       </div>
 
-      <Card className="border-0 shadow-2xl bg-linear-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700">
-        <CardHeader className="pb-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-linear-to-br from-emerald-500 to-blue-500 rounded-2xl flex items-center justify-center">
-              <Zap className="w-6 h-6 text-white" />
+      <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-3xl bg-white dark:bg-zinc-900/50">
+        <CardHeader className="pb-6 pt-8 px-8">
+          <div className="flex items-center space-x-4">
+            <div className="w-14 h-14 bg-zinc-900 dark:bg-indigo-600 rounded-xl flex items-center justify-center shadow-md">
+              <Zap className="w-7 h-7 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl">Campaign Details</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">Campaign Details</CardTitle>
+              <CardDescription className="text-zinc-500 dark:text-zinc-400 mt-1">
                 Configure your affiliate program settings
               </CardDescription>
             </div>
           </div>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="px-8 pb-8">
           <form onSubmit={handleCreateCampaign}>
-            <div className="space-y-6">
+            <div className="space-y-8">
               <InputField
                 label="Campaign Name"
                 description="Give your campaign a recognizable name"
@@ -116,6 +115,7 @@ export const CreateCampaignForm = () => {
                   value={campaignName}
                   onChange={(e) => setCampaignName(e.target.value)}
                   placeholder="e.g., Summer Sale 2024"
+                  className="h-12 border-slate-200 dark:border-zinc-800 focus:ring-indigo-600 dark:focus:ring-indigo-500 rounded-xl bg-slate-50 dark:bg-zinc-950"
                   required
                 />
               </InputField>
@@ -134,9 +134,10 @@ export const CreateCampaignForm = () => {
                       value={commissionRate}
                       onChange={(e) => setCommissionRate(e.target.value)}
                       placeholder="e.g., 15 for 15%"
+                      className="h-12 border-slate-200 dark:border-zinc-800 focus:ring-indigo-600 dark:focus:ring-indigo-500 rounded-xl bg-slate-50 dark:bg-zinc-950"
                       required
                     />
-                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-zinc-400 font-medium">
                       %
                     </div>
                   </div>
@@ -152,8 +153,9 @@ export const CreateCampaignForm = () => {
                       value={budget}
                       onChange={(e) => setBudget(e.target.value)}
                       placeholder="e.g., 10000"
+                      className="h-12 border-slate-200 dark:border-zinc-800 focus:ring-indigo-600 dark:focus:ring-indigo-500 rounded-xl bg-slate-50 dark:bg-zinc-950"
                     />
-                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-zinc-400 font-medium">
                       BDAG
                     </div>
                   </div>
@@ -176,10 +178,10 @@ export const CreateCampaignForm = () => {
                             ? "default"
                             : "outline"
                         }
-                        className={`flex-1 ${
+                        className={`flex-1 h-12 rounded-xl transition-all font-semibold ${
                           clearingPeriod === period.value
-                            ? "bg-linear-to-r from-emerald-500 to-blue-500 text-white"
-                            : "border-emerald-200 hover:bg-emerald-50"
+                            ? "bg-zinc-900 dark:bg-indigo-600 text-white shadow-md border-0"
+                            : "border border-slate-200 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
                         }`}
                         onClick={() => setClearingPeriod(period.value)}
                       >
@@ -194,8 +196,9 @@ export const CreateCampaignForm = () => {
                       value={clearingPeriod}
                       onChange={(e) => setClearingPeriod(e.target.value)}
                       placeholder="Or enter custom period in seconds"
+                      className="h-12 border-slate-200 dark:border-zinc-800 focus:ring-indigo-600 dark:focus:ring-indigo-500 rounded-xl bg-slate-50 dark:bg-zinc-950"
                     />
-                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-zinc-400 font-medium">
                       seconds
                     </div>
                   </div>
@@ -203,26 +206,26 @@ export const CreateCampaignForm = () => {
               </InputField>
 
               {/* Summary Card */}
-              <div className="bg-linear-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 p-4 rounded-xl border border-emerald-200 dark:border-emerald-800">
-                <h4 className="font-semibold text-emerald-700 dark:text-emerald-300 mb-3">
+              <div className="bg-slate-50 dark:bg-zinc-950/50 p-6 rounded-2xl border border-slate-100 dark:border-zinc-800/50">
+                <h4 className="font-bold text-zinc-900 dark:text-white uppercase tracking-wider text-xs mb-4">
                   Campaign Summary
                 </h4>
-                <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
                   <div className="space-y-2">
-                    <div className="flex items-center text-muted-foreground">
+                    <div className="flex items-center text-zinc-500 dark:text-zinc-400 font-medium">
                       <Target className="w-4 h-4 mr-2" />
                       Commission Rate
                     </div>
-                    <div className="font-semibold">
+                    <div className="font-bold text-zinc-900 dark:text-white text-lg">
                       {commissionRate || "0"}%
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <div className="flex items-center text-muted-foreground">
+                    <div className="flex items-center text-zinc-500 dark:text-zinc-400 font-medium">
                       <Clock className="w-4 h-4 mr-2" />
                       Clearing Period
                     </div>
-                    <div className="font-semibold">
+                    <div className="font-bold text-zinc-900 dark:text-white text-lg">
                       {clearingPeriod
                         ? Math.round(parseInt(clearingPeriod) / 86400)
                         : "0"}{" "}
@@ -230,11 +233,11 @@ export const CreateCampaignForm = () => {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <div className="flex items-center text-muted-foreground">
+                    <div className="flex items-center text-zinc-500 dark:text-zinc-400 font-medium">
                       <DollarSign className="w-4 h-4 mr-2" />
                       Estimated Budget
                     </div>
-                    <div className="font-semibold">{budget || "0"} BDAG</div>
+                    <div className="font-bold text-zinc-900 dark:text-white text-lg">{budget || "0"} BDAG</div>
                   </div>
                 </div>
               </div>
@@ -242,11 +245,11 @@ export const CreateCampaignForm = () => {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-14 bg-linear-to-r from-emerald-500 to-blue-500 hover:from-emerald-600 hover:to-blue-600 text-white text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="w-full h-14 bg-zinc-900 hover:bg-zinc-800 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white text-lg font-bold shadow-lg rounded-xl transition-all"
               >
                 {isLoading ? (
-                  <div className="flex items-center space-x-2">
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <div className="flex items-center space-x-3">
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     <span>Creating Campaign...</span>
                   </div>
                 ) : (

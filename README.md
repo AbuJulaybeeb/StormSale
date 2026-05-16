@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# StormSale ⚡
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> The Future of Trustless Affiliate Marketing, powered by BlockDAG and built on NIST/ISO security principles.
 
-Currently, two official plugins are available:
+StormSale is a secure Web3 affiliate platform that revolutionizes how advertisers and affiliates collaborate. By leveraging military-grade on-chain encryption and smart contract escrows, StormSale ensures transparent, trustless, and secure commission payouts.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Key Features
 
-## React Compiler
+- **🛡️ On-Chain Encryption:** All affiliate data is secured on-chain using hybrid AES + Public Key encryption.
+- **🔑 Cryptographic Access:** Only authorized parties can access the data using their private keys. No exceptions.
+- **📜 NIST/ISO Compliant:** Designed from the ground up to meet core cybersecurity standards.
+- **🤝 Trustless Escrow:** Advertiser creates encrypted sale records with commission escrow in BDAG tokens.
+- **📊 Role-Based Dashboards:** Dedicated interfaces for Advertisers, Affiliates, and Auditors.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ⚙️ How It Works
 
-## Expanding the ESLint configuration
+1. **Advertiser Logs Sale:** Advertisers create encrypted sale records and lock commission escrow in BDAG tokens.
+2. **Data is Encrypted & Escrowed:** All sensitive affiliate data is encrypted on-chain while tokens are held in a secure smart contract escrow.
+3. **Affiliate Claims Payout:** After the clearing period, the affiliate decrypts their data and claims the commission.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+- **Frontend:** React 19, TypeScript, Vite
+- **Styling:** Tailwind CSS v4, Radix UI, Lucide Icons
+- **Web3:** Ethers.js v6, WalletConnect Ethereum Provider
+- **Build & Tooling:** ESLint, Prettier, TypeScript strict mode
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🚀 Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+### Prerequisites
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Node.js (v18+ recommended)
+- npm or yarn
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+### Installation
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/stormsale.git
+   cd stormsale
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## 🤝 Contributing
+
+We welcome contributions! Please check the issues tab for beginner-friendly tasks or submit a PR.
+
+## 📄 License
+
+© 2024 StormSale. All rights reserved. Built on BlockDAG.

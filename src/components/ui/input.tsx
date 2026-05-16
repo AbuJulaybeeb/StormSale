@@ -9,9 +9,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, variant = "default", ...props }, ref) => {
     const variantStyles = {
       default:
-        "border-gray-300 focus:ring-emerald-500 focus:border-emerald-500 dark:border-gray-600",
+        "border-gray-300 focus:ring-emerald-500 focus:border-slate-200 dark:border-slate-800 dark:border-gray-600",
       success:
-        "border-emerald-500 focus:ring-emerald-500 focus:border-emerald-500 dark:border-emerald-400",
+        "border-slate-200 dark:border-slate-800 focus:ring-emerald-500 focus:border-slate-200 dark:border-slate-800 dark:border-slate-200 dark:border-slate-800",
       error:
         "border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-400",
       warning:

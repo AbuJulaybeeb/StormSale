@@ -9,14 +9,10 @@ export const InputGroup: React.FC<InputGroupProps> = ({
   children,
   className,
 }) => {
-  function cn(arg0: string, className: string | undefined): string | undefined {
-    throw new Error("Function not implemented.");
-  }
-
   return (
     <div
       className={cn(
-        "space-y-6 bg-white dark:bg-gray-800 p-6 rounded-2xl border border-emerald-100 dark:border-emerald-900 shadow-lg",
+        "space-y-6",
         className,
       )}
     >

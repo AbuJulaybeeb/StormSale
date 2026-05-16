@@ -11,7 +11,7 @@ import { Affiliate } from "./pages/Affiliate";
 import { Auditor } from "./pages/Auditor";
 import { useWeb3 } from "./hooks/useWeb3";
 import { Header } from "./components/shared/Header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
@@ -43,7 +43,7 @@ class ErrorBoundary extends React.Component<
             </p>
             <button
               onClick={() => window.location.reload()}
-              className="px-4 py-2 bg-emerald-600 text-white rounded"
+              className="px-4 py-2 bg-indigo-600 text-white rounded"
             >
               Reload
             </button>
@@ -57,8 +57,14 @@ class ErrorBoundary extends React.Component<
 }
 
 function Router() {
-  const { isConnected } = useWeb3();
+  const { isConnected, userRole } = useWeb3();
   const [currentPage, setCurrentPage] = useState("dashboard");
+
+  useEffect(() => {
+    if (isConnected && userRole && currentPage === "dashboard") {
+      setCurrentPage(userRole.toLowerCase());
+    }
+  }, [isConnected, userRole, currentPage]);
 
   if (!isConnected) {
     return <Landing />;

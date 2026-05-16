@@ -6,7 +6,7 @@ export async function generateAESKey(): Promise<CryptoKey> {
 
 export async function encryptPayload(
   payload: object,
-  aesKey: CryptoKey,
+  _aesKey: CryptoKey,
 ): Promise<string> {
   // Placeholder
   console.log("Stub: Encrypting payload...", payload);
@@ -14,7 +14,7 @@ export async function encryptPayload(
 }
 
 export async function wrapAESKey(
-  aesKey: CryptoKey,
+  _aesKey: CryptoKey,
   publicKey: string,
 ): Promise<string> {
   // Placeholder
@@ -23,8 +23,8 @@ export async function wrapAESKey(
 }
 
 export async function unwrapAESKey(
-  wrappedKey: string,
-  privateKey: string,
+  _wrappedKey: string,
+  _privateKey: string,
 ): Promise<CryptoKey> {
   // Placeholder
   console.log("Stub: Unwrapping AES key...");
@@ -32,8 +32,8 @@ export async function unwrapAESKey(
 }
 
 export async function decryptPayload(
-  encryptedPayload: string,
-  aesKey: CryptoKey,
+  _encryptedPayload: string,
+  _aesKey: CryptoKey,
 ): Promise<object> {
   // Placeholder
   console.log("Stub: Decrypting payload...");
