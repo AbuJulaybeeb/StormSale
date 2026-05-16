@@ -5,20 +5,8 @@ interface InputGroupProps {
   className?: string;
 }
 
-export const InputGroup: React.FC<InputGroupProps> = ({
-  children,
-  className,
-}) => {
-  return (
-    <div
-      className={cn(
-        "space-y-6",
-        className,
-      )}
-    >
-      {children}
-    </div>
-  );
+export const InputGroup: React.FC<InputGroupProps> = ({ children, className }) => {
+  return <div className={cn("space-y-6", className)}>{children}</div>;
 };
 
 interface InputFieldProps {
@@ -45,9 +33,7 @@ export const InputField: React.FC<InputFieldProps> = ({
         {required && <span className="text-red-500 ml-1">*</span>}
       </label>
 
-      {description && (
-        <p className="text-sm text-muted-foreground">{description}</p>
-      )}
+      {description && <p className="text-sm text-muted-foreground">{description}</p>}
 
       {children}
 

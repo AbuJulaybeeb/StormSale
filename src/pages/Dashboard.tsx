@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { useWeb3 } from "../hooks/useWeb3";
 import {
@@ -56,12 +50,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       description:
         "Join campaigns, track sales, and claim your commissions securely with crypto payouts.",
       icon: Users,
-      features: [
-        "Join Campaigns",
-        "Track Performance",
-        "Secure Payouts",
-        "Real-time Analytics",
-      ],
+      features: ["Join Campaigns", "Track Performance", "Secure Payouts", "Real-time Analytics"],
       stats: "10K+ Happy Affiliates",
     },
     {
@@ -70,12 +59,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       description:
         "Access encrypted sale data with proper authorization and compliance verification.",
       icon: Eye,
-      features: [
-        "Secure Data Access",
-        "Compliance Tools",
-        "Audit Trails",
-        "Enterprise Features",
-      ],
+      features: ["Secure Data Access", "Compliance Tools", "Audit Trails", "Enterprise Features"],
       stats: "Enterprise Grade Security",
     },
   ];
@@ -167,9 +151,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                     <div className="mb-6 p-4 bg-slate-50 dark:bg-zinc-950/50 rounded-xl border border-slate-100 dark:border-zinc-800/50">
                       <div className="flex items-center text-sm font-semibold">
                         <TrendingUp className="w-4 h-4 text-indigo-600 dark:text-indigo-400 mr-3" />
-                        <span className="text-zinc-900 dark:text-white">
-                          {role.stats}
-                        </span>
+                        <span className="text-zinc-900 dark:text-white">{role.stats}</span>
                       </div>
                     </div>
 

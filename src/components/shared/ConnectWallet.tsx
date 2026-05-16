@@ -26,9 +26,7 @@ export const ConnectWallet = () => {
     return (
       <div className="flex items-center space-x-2">
         <div className="w-2 h-2 bg-indigo-600 rounded-full"></div>
-        <span className="text-sm font-medium">
-          {formatAddress(userAddress!)}
-        </span>
+        <span className="text-sm font-medium">{formatAddress(userAddress!)}</span>
       </div>
     );
   }

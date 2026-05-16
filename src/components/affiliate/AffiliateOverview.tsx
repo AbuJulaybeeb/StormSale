@@ -6,15 +6,7 @@ import {
   CardTitle,
 } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
-import {
-  TrendingUp,
-  Users,
-  DollarSign,
-  Target,
-  Zap,
-  ArrowRight,
-  CheckCircle2,
-} from "lucide-react";
+import { TrendingUp, Users, DollarSign, Target, Zap, ArrowRight, CheckCircle2 } from "lucide-react";
 
 export const AffiliateOverview = () => {
   const stats = [
@@ -88,7 +80,9 @@ export const AffiliateOverview = () => {
                     <p className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                       {stat.title}
                     </p>
-                    <p className="text-2xl font-extrabold text-zinc-900 dark:text-white mt-2 mb-1">{stat.value}</p>
+                    <p className="text-2xl font-extrabold text-zinc-900 dark:text-white mt-2 mb-1">
+                      {stat.value}
+                    </p>
                     <p className="text-xs font-medium text-indigo-600 dark:text-indigo-400">
                       {stat.change}
                     </p>
@@ -108,8 +102,12 @@ export const AffiliateOverview = () => {
         {/* Recent Payouts */}
         <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
           <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
-            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Recent Payouts</CardTitle>
-            <CardDescription className="text-zinc-500 dark:text-zinc-400">Your latest commission payments</CardDescription>
+            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">
+              Recent Payouts
+            </CardTitle>
+            <CardDescription className="text-zinc-500 dark:text-zinc-400">
+              Your latest commission payments
+            </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
             <div className="space-y-4">
@@ -123,7 +121,9 @@ export const AffiliateOverview = () => {
                       <DollarSign className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                     </div>
                     <div>
-                      <div className="font-bold text-sm text-zinc-900 dark:text-white">{payout.campaign}</div>
+                      <div className="font-bold text-sm text-zinc-900 dark:text-white">
+                        {payout.campaign}
+                      </div>
                       <div className="text-xs font-medium text-zinc-400 dark:text-zinc-500 mt-0.5">
                         {payout.date}
                       </div>
@@ -156,8 +156,12 @@ export const AffiliateOverview = () => {
         {/* Performance Tips */}
         <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
           <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
-            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Performance Tips</CardTitle>
-            <CardDescription className="text-zinc-500 dark:text-zinc-400">Boost your affiliate earnings</CardDescription>
+            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">
+              Performance Tips
+            </CardTitle>
+            <CardDescription className="text-zinc-500 dark:text-zinc-400">
+              Boost your affiliate earnings
+            </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
             <div className="space-y-4">
@@ -177,7 +181,9 @@ export const AffiliateOverview = () => {
                   key={index}
                   className="flex items-center justify-between p-4 bg-slate-50 dark:bg-zinc-950/50 border border-slate-100 dark:border-zinc-800/50 rounded-xl"
                 >
-                  <div className="text-sm font-medium text-zinc-700 dark:text-zinc-300 pr-4">{item.tip}</div>
+                  <div className="text-sm font-medium text-zinc-700 dark:text-zinc-300 pr-4">
+                    {item.tip}
+                  </div>
                   <span
                     className={`shrink-0 text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full ${
                       item.impact === "High"
@@ -197,8 +203,12 @@ export const AffiliateOverview = () => {
       {/* Quick Actions */}
       <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
         <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
-          <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Quick Actions</CardTitle>
-          <CardDescription className="text-zinc-500 dark:text-zinc-400">Get started quickly</CardDescription>
+          <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">
+            Quick Actions
+          </CardTitle>
+          <CardDescription className="text-zinc-500 dark:text-zinc-400">
+            Get started quickly
+          </CardDescription>
         </CardHeader>
         <CardContent className="pt-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -228,7 +238,9 @@ export const AffiliateOverview = () => {
                 >
                   <IconComponent className="w-6 h-6 text-zinc-400 dark:text-zinc-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" />
                   <div className="text-center">
-                    <div className="text-sm font-bold text-zinc-700 dark:text-zinc-300">{action.label}</div>
+                    <div className="text-sm font-bold text-zinc-700 dark:text-zinc-300">
+                      {action.label}
+                    </div>
                     <div className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 mt-0.5">
                       {action.description}
                     </div>

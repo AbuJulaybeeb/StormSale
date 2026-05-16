@@ -63,10 +63,7 @@ export const LogSaleForm = () => {
       const advertiserPublicKey = await getPublicKeyForAddress(userAddress!);
       const affiliatePublicKey = await getPublicKeyForAddress(affiliateAddress);
 
-      const advertiserWrappedKey = await wrapAESKey(
-        aesKey,
-        advertiserPublicKey,
-      );
+      const advertiserWrappedKey = await wrapAESKey(aesKey, advertiserPublicKey);
       const affiliateWrappedKey = await wrapAESKey(aesKey, affiliatePublicKey);
 
       showNotification({
@@ -81,7 +78,7 @@ export const LogSaleForm = () => {
         encryptedPayload,
         advertiserWrappedKey,
         affiliateWrappedKey,
-        { value: saleAmount }, 
+        { value: saleAmount },
       );
 
       await tx.wait();
@@ -126,7 +123,9 @@ export const LogSaleForm = () => {
               <Shield className="w-7 h-7 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">Secure Sale Logging</CardTitle>
+              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">
+                Secure Sale Logging
+              </CardTitle>
               <CardDescription className="text-zinc-500 dark:text-zinc-400 mt-1">
                 All data is encrypted before being stored on-chain
               </CardDescription>

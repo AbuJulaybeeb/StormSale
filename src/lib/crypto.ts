@@ -4,28 +4,19 @@ export async function generateAESKey(): Promise<CryptoKey> {
   return {} as CryptoKey;
 }
 
-export async function encryptPayload(
-  payload: object,
-  _aesKey: CryptoKey,
-): Promise<string> {
+export async function encryptPayload(payload: object, _aesKey: CryptoKey): Promise<string> {
   // Placeholder
   console.log("Stub: Encrypting payload...", payload);
   return "STUB_ENCRYPTED_PAYLOAD";
 }
 
-export async function wrapAESKey(
-  _aesKey: CryptoKey,
-  publicKey: string,
-): Promise<string> {
+export async function wrapAESKey(_aesKey: CryptoKey, publicKey: string): Promise<string> {
   // Placeholder
   console.log("Stub: Wrapping AES key for public key:", publicKey);
   return "STUB_WRAPPED_KEY";
 }
 
-export async function unwrapAESKey(
-  _wrappedKey: string,
-  _privateKey: string,
-): Promise<CryptoKey> {
+export async function unwrapAESKey(_wrappedKey: string, _privateKey: string): Promise<CryptoKey> {
   // Placeholder
   console.log("Stub: Unwrapping AES key...");
   return {} as CryptoKey;

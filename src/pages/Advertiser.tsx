@@ -6,16 +6,8 @@ import { LogSaleForm } from "../components/advertiser/LogSaleForm";
 import { GrantAccessForm } from "../components/advertiser/GrantAccessForm";
 import { CampaignAnalytics } from "../components/advertiser/CampaignAnalytics";
 import { MyCampaignsList } from "../components/advertiser/MyCampaignsList";
-import {
-  NotificationProvider,
-} from "../context/NotificationContext";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card";
+import { NotificationProvider } from "../context/NotificationContext";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import {
   ArrowRight,
   Plus,
@@ -124,7 +116,12 @@ const AdvertiserOverview = () => {
         {[
           { title: "Active Campaigns", value: "12", change: "+2 this week", icon: Megaphone },
           { title: "Total Sales", value: "1,234", change: "+12% vs last month", icon: BarChart3 },
-          { title: "Total Commissions", value: "$45,678", change: "+8% vs last month", icon: TrendingUp },
+          {
+            title: "Total Commissions",
+            value: "$45,678",
+            change: "+8% vs last month",
+            icon: TrendingUp,
+          },
           { title: "Active Affiliates", value: "89", change: "+5 this week", icon: Users },
         ].map((stat, index) => {
           const IconComponent = stat.icon;
@@ -139,7 +136,9 @@ const AdvertiserOverview = () => {
                     <p className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                       {stat.title}
                     </p>
-                    <p className="text-2xl font-extrabold text-zinc-900 dark:text-white mt-2 mb-1">{stat.value}</p>
+                    <p className="text-2xl font-extrabold text-zinc-900 dark:text-white mt-2 mb-1">
+                      {stat.value}
+                    </p>
                     <p className="text-xs font-medium text-indigo-600 dark:text-indigo-400">
                       {stat.change}
                     </p>
@@ -159,22 +158,43 @@ const AdvertiserOverview = () => {
         {/* Recent Activity */}
         <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
           <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
-            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Recent Activity</CardTitle>
-            <CardDescription className="text-zinc-500 dark:text-zinc-400">Latest on-chain actions and updates</CardDescription>
+            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">
+              Recent Activity
+            </CardTitle>
+            <CardDescription className="text-zinc-500 dark:text-zinc-400">
+              Latest on-chain actions and updates
+            </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
             <div className="space-y-4">
               {[
-                { action: "Sale Logged (Encrypted)", campaign: "Tech Gadgets", amount: "$1,200", time: "2 hours ago" },
-                { action: "Campaign Created", campaign: "Summer Sale", amount: "N/A", time: "5 hours ago" },
-                { action: "Commission Escrowed", campaign: "Web3 Tools", amount: "$450", time: "1 day ago" },
+                {
+                  action: "Sale Logged (Encrypted)",
+                  campaign: "Tech Gadgets",
+                  amount: "$1,200",
+                  time: "2 hours ago",
+                },
+                {
+                  action: "Campaign Created",
+                  campaign: "Summer Sale",
+                  amount: "N/A",
+                  time: "5 hours ago",
+                },
+                {
+                  action: "Commission Escrowed",
+                  campaign: "Web3 Tools",
+                  amount: "$450",
+                  time: "1 day ago",
+                },
               ].map((activity, index) => (
                 <div
                   key={index}
                   className="flex items-center justify-between p-4 bg-slate-50 dark:bg-zinc-950/50 border border-slate-100 dark:border-zinc-800/50 rounded-xl hover:border-slate-200 dark:hover:border-zinc-700 transition-colors"
                 >
                   <div>
-                    <div className="font-bold text-sm text-zinc-900 dark:text-white">{activity.action}</div>
+                    <div className="font-bold text-sm text-zinc-900 dark:text-white">
+                      {activity.action}
+                    </div>
                     <div className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-1">
                       {activity.campaign}
                     </div>
@@ -190,7 +210,10 @@ const AdvertiserOverview = () => {
                 </div>
               ))}
             </div>
-            <Button variant="ghost" className="w-full mt-4 text-indigo-600 dark:text-indigo-400 font-semibold hover:bg-slate-50 dark:hover:bg-zinc-900/50">
+            <Button
+              variant="ghost"
+              className="w-full mt-4 text-indigo-600 dark:text-indigo-400 font-semibold hover:bg-slate-50 dark:hover:bg-zinc-900/50"
+            >
               View All Activity <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </CardContent>
@@ -199,8 +222,12 @@ const AdvertiserOverview = () => {
         {/* Quick Actions */}
         <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
           <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
-            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Quick Actions</CardTitle>
-            <CardDescription className="text-zinc-500 dark:text-zinc-400">Frequently used smart contract calls</CardDescription>
+            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">
+              Quick Actions
+            </CardTitle>
+            <CardDescription className="text-zinc-500 dark:text-zinc-400">
+              Frequently used smart contract calls
+            </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
             <div className="grid grid-cols-2 gap-4">
@@ -219,7 +246,9 @@ const AdvertiserOverview = () => {
                     onClick={action.action}
                   >
                     <IconComponent className="w-6 h-6 text-zinc-400 dark:text-zinc-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" />
-                    <span className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">{action.label}</span>
+                    <span className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+                      {action.label}
+                    </span>
                   </Button>
                 );
               })}
@@ -230,5 +259,3 @@ const AdvertiserOverview = () => {
     </div>
   );
 };
-
-

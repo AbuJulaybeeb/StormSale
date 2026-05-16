@@ -47,7 +47,9 @@ export const JoinCampaignButton = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">Join Campaign</h2>
+        <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
+          Join Campaign
+        </h2>
         <p className="text-zinc-500 dark:text-zinc-400 mt-2 font-medium">
           Enter a campaign contract address to register as an affiliate
         </p>
@@ -60,7 +62,9 @@ export const JoinCampaignButton = () => {
               <Users className="w-7 h-7 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">Join Affiliate Program</CardTitle>
+              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">
+                Join Affiliate Program
+              </CardTitle>
               <CardDescription className="text-zinc-500 dark:text-zinc-400 mt-1">
                 Connect your wallet to register on-chain and start earning commissions
               </CardDescription>
@@ -69,7 +73,10 @@ export const JoinCampaignButton = () => {
         </CardHeader>
         <CardContent className="px-8 pb-8 pt-6 space-y-6">
           <div className="space-y-3">
-            <Label htmlFor="campaignAddress" className="text-sm font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
+            <Label
+              htmlFor="campaignAddress"
+              className="text-sm font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider"
+            >
               Campaign Contract Address
             </Label>
             <Input
@@ -89,9 +96,12 @@ export const JoinCampaignButton = () => {
             <div className="flex items-start gap-3">
               <Shield className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
               <div>
-                <p className="font-bold text-indigo-900 dark:text-indigo-300 text-sm">What happens next?</p>
+                <p className="font-bold text-indigo-900 dark:text-indigo-300 text-sm">
+                  What happens next?
+                </p>
                 <p className="text-xs font-medium text-indigo-700 dark:text-indigo-400 mt-1 leading-relaxed">
-                  Joining registers your wallet on-chain. The advertiser can then log encrypted sales attributed to you, and you can claim commissions after the clearing period.
+                  Joining registers your wallet on-chain. The advertiser can then log encrypted
+                  sales attributed to you, and you can claim commissions after the clearing period.
                 </p>
               </div>
             </div>

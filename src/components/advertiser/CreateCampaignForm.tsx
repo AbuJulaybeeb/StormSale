@@ -36,10 +36,7 @@ export const CreateCampaignForm = () => {
 
     setIsLoading(true);
     try {
-      const tx = await factoryContract.createCampaign(
-        commissionRate,
-        clearingPeriod,
-      );
+      const tx = await factoryContract.createCampaign(commissionRate, clearingPeriod);
 
       showNotification({
         type: "info",
@@ -95,7 +92,9 @@ export const CreateCampaignForm = () => {
               <Zap className="w-7 h-7 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">Campaign Details</CardTitle>
+              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">
+                Campaign Details
+              </CardTitle>
               <CardDescription className="text-zinc-500 dark:text-zinc-400 mt-1">
                 Configure your affiliate program settings
               </CardDescription>
@@ -173,11 +172,7 @@ export const CreateCampaignForm = () => {
                       <Button
                         key={period.value}
                         type="button"
-                        variant={
-                          clearingPeriod === period.value
-                            ? "default"
-                            : "outline"
-                        }
+                        variant={clearingPeriod === period.value ? "default" : "outline"}
                         className={`flex-1 h-12 rounded-xl transition-all font-semibold ${
                           clearingPeriod === period.value
                             ? "bg-zinc-900 dark:bg-indigo-600 text-white shadow-md border-0"
@@ -226,10 +221,7 @@ export const CreateCampaignForm = () => {
                       Clearing Period
                     </div>
                     <div className="font-bold text-zinc-900 dark:text-white text-lg">
-                      {clearingPeriod
-                        ? Math.round(parseInt(clearingPeriod) / 86400)
-                        : "0"}{" "}
-                      days
+                      {clearingPeriod ? Math.round(parseInt(clearingPeriod) / 86400) : "0"} days
                     </div>
                   </div>
                   <div className="space-y-2">
@@ -237,7 +229,9 @@ export const CreateCampaignForm = () => {
                       <DollarSign className="w-4 h-4 mr-2" />
                       Estimated Budget
                     </div>
-                    <div className="font-bold text-zinc-900 dark:text-white text-lg">{budget || "0"} BDAG</div>
+                    <div className="font-bold text-zinc-900 dark:text-white text-lg">
+                      {budget || "0"} BDAG
+                    </div>
                   </div>
                 </div>
               </div>

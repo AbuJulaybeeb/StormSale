@@ -31,7 +31,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       animate={{ width: isCollapsed ? 80 : 320 }}
       className={cn(
         "hidden lg:flex flex-col bg-white dark:bg-zinc-950/50 border-r border-slate-200 dark:border-zinc-800 shadow-sm relative transition-colors duration-300",
-        className
+        className,
       )}
     >
       {/* Toggle Button */}
@@ -41,11 +41,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         onClick={() => setIsCollapsed(!isCollapsed)}
         className="absolute -right-3 top-20 w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-sm z-50 hover:bg-slate-100 dark:hover:bg-zinc-800"
       >
-        {isCollapsed ? (
-          <ChevronRight className="w-3 h-3" />
-        ) : (
-          <ChevronLeft className="w-3 h-3" />
-        )}
+        {isCollapsed ? <ChevronRight className="w-3 h-3" /> : <ChevronLeft className="w-3 h-3" />}
       </Button>
 
       {/* Header / Back */}
@@ -111,7 +107,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   isActive
                     ? "bg-zinc-900 dark:bg-indigo-600 text-white font-medium shadow-md"
                     : "text-zinc-600 dark:text-zinc-400 hover:bg-slate-100 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-white",
-                  isCollapsed ? "justify-center px-0" : "justify-start px-4"
+                  isCollapsed ? "justify-center px-0" : "justify-start px-4",
                 )}
                 onClick={() => onTabChange(tab.id)}
               >
@@ -119,7 +115,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   className={cn(
                     "w-5 h-5 shrink-0 transition-transform duration-200",
                     !isCollapsed && "mr-3",
-                    isActive ? "opacity-100" : "opacity-70 group-hover:scale-110"
+                    isActive ? "opacity-100" : "opacity-70 group-hover:scale-110",
                   )}
                 />
                 {!isCollapsed && (
@@ -148,7 +144,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div
           className={cn(
             "bg-slate-50 dark:bg-zinc-900/50 rounded-xl border border-slate-200 dark:border-zinc-800/50 transition-all duration-300",
-            isCollapsed ? "p-2" : "p-4"
+            isCollapsed ? "p-2" : "p-4",
           )}
         >
           {!isCollapsed ? (

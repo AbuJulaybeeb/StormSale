@@ -44,10 +44,7 @@ export const GrantAccessForm = () => {
       });
 
       const auditorPublicKey = await getPublicKeyForAddress(auditorAddress);
-      const auditorWrappedKey = await wrapAESKey(
-        {} as CryptoKey,
-        auditorPublicKey,
-      );
+      const auditorWrappedKey = await wrapAESKey({} as CryptoKey, auditorPublicKey);
 
       showNotification({
         type: "info",
@@ -55,11 +52,7 @@ export const GrantAccessForm = () => {
         message: "Granting audit access...",
       });
 
-      const tx = await campaignContract.grantAuditAccess(
-        saleId,
-        auditorAddress,
-        auditorWrappedKey,
-      );
+      const tx = await campaignContract.grantAuditAccess(saleId, auditorAddress, auditorWrappedKey);
 
       await tx.wait();
 
@@ -102,7 +95,9 @@ export const GrantAccessForm = () => {
               <Eye className="w-7 h-7 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">Auditor Access Control</CardTitle>
+              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">
+                Auditor Access Control
+              </CardTitle>
               <CardDescription className="text-zinc-500 dark:text-zinc-400 mt-1">
                 Grant secure data access to authorized auditors
               </CardDescription>
@@ -168,9 +163,9 @@ export const GrantAccessForm = () => {
                       Security Notice
                     </h4>
                     <p className="text-sm font-medium text-indigo-700 dark:text-indigo-400 mt-2 leading-relaxed">
-                      Only grant access to verified auditors. The auditor will
-                      be able to decrypt and view the sale data using their
-                      private key. This action is permanently recorded on-chain.
+                      Only grant access to verified auditors. The auditor will be able to decrypt
+                      and view the sale data using their private key. This action is permanently
+                      recorded on-chain.
                     </p>
                   </div>
                 </div>

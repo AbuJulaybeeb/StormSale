@@ -1,9 +1,6 @@
 import React from "react";
 import { Web3Provider } from "./context/Web3Context";
-import {
-  NotificationProvider,
-  NotificationWrapper,
-} from "./context/NotificationContext";
+import { NotificationProvider, NotificationWrapper } from "./context/NotificationContext";
 import { Landing } from "./pages/Landing";
 import { Dashboard } from "./pages/Dashboard";
 import { Advertiser } from "./pages/Advertiser";
@@ -38,8 +35,7 @@ class ErrorBoundary extends React.Component<
           <div className="max-w-lg text-center">
             <h2 className="text-2xl font-bold mb-2">Something went wrong</h2>
             <p className="text-sm text-muted-foreground mb-4">
-              An unexpected error occurred. Please refresh the page or try again
-              later.
+              An unexpected error occurred. Please refresh the page or try again later.
             </p>
             <button
               onClick={() => window.location.reload()}
@@ -74,18 +70,10 @@ function Router() {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        {currentPage === "dashboard" && (
-          <Dashboard onNavigate={setCurrentPage} />
-        )}
-        {currentPage === "advertiser" && (
-          <Advertiser onBack={() => setCurrentPage("dashboard")} />
-        )}
-        {currentPage === "affiliate" && (
-          <Affiliate onBack={() => setCurrentPage("dashboard")} />
-        )}
-        {currentPage === "auditor" && (
-          <Auditor onBack={() => setCurrentPage("dashboard")} />
-        )}
+        {currentPage === "dashboard" && <Dashboard onNavigate={setCurrentPage} />}
+        {currentPage === "advertiser" && <Advertiser onBack={() => setCurrentPage("dashboard")} />}
+        {currentPage === "affiliate" && <Affiliate onBack={() => setCurrentPage("dashboard")} />}
+        {currentPage === "auditor" && <Auditor onBack={() => setCurrentPage("dashboard")} />}
       </main>
     </div>
   );

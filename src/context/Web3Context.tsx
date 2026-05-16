@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  useRef,
-} from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
 import type { ReactNode } from "react";
 import { ethers } from "ethers";
 import { EthereumProvider } from "@walletconnect/ethereum-provider";
@@ -18,13 +12,9 @@ import factoryJson from "../context/AffiliateFactory.json";
 import campaignJson from "../context/Campaign.json";
 
 const FACTORY_ABI =
-  factoryJson && (factoryJson as any).abi
-    ? (factoryJson as any).abi
-    : (factoryJson as any);
+  factoryJson && (factoryJson as any).abi ? (factoryJson as any).abi : (factoryJson as any);
 const CAMPAIGN_ABI =
-  campaignJson && (campaignJson as any).abi
-    ? (campaignJson as any).abi
-    : (campaignJson as any);
+  campaignJson && (campaignJson as any).abi ? (campaignJson as any).abi : (campaignJson as any);
 
 declare global {
   interface Window {
@@ -39,9 +29,7 @@ interface Web3ContextType {
   userRole: string | null;
   factoryContract: ethers.Contract | null;
   campaignContracts: Map<string, ethers.Contract>;
-  connectWallet: (
-    connectorType?: "metamask" | "walletconnect",
-  ) => Promise<void>;
+  connectWallet: (connectorType?: "metamask" | "walletconnect") => Promise<void>;
   disconnectWallet: () => void;
   updateUserRole: (role: string) => Promise<void>;
   getCampaignContract: (address: string) => ethers.Contract;
@@ -62,18 +50,16 @@ export function Web3Provider({ children }: { children: ReactNode }) {
   const [signer, setSigner] = useState<ethers.Signer | null>(null);
   const [userAddress, setUserAddress] = useState<string | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
-  const [factoryContract, setFactoryContract] =
-    useState<ethers.Contract | null>(null);
-  const [campaignContracts, setCampaignContracts] = useState<
-    Map<string, ethers.Contract>
-  >(new Map());
+  const [factoryContract, setFactoryContract] = useState<ethers.Contract | null>(null);
+  const [campaignContracts, setCampaignContracts] = useState<Map<string, ethers.Contract>>(
+    new Map(),
+  );
   const [isConnected, setIsConnected] = useState(false);
   const [isBlockDAGNetwork, setIsBlockDAGNetwork] = useState(false);
-  const [connectorType, setConnectorType] = useState<
-    "metamask" | "walletconnect" | null
-  >(null);
-  const [walletConnectProvider, setWalletConnectProvider] =
-    useState<InstanceType<typeof EthereumProvider> | null>(null);
+  const [connectorType, setConnectorType] = useState<"metamask" | "walletconnect" | null>(null);
+  const [walletConnectProvider, setWalletConnectProvider] = useState<InstanceType<
+    typeof EthereumProvider
+  > | null>(null);
   const wcInitRef = useRef(false); // <- added: prevents re-init within same mount
   const wcConnectingRef = useRef(false); // <- added: prevents concurrent connect() calls
 
@@ -118,16 +104,18 @@ export function Web3Provider({ children }: { children: ReactNode }) {
 
           // attach events only once
           if (!(provider as any).__stormsale_events_attached) {
-              provider.on("accountsChanged", (accounts: string[]) => {
-                if (accounts.length === 0) {
-                  disconnectWallet();
-                } else {
-                  setUserAddress(accounts[0]);
-                  registerUser(accounts[0]).then(user => {
+            provider.on("accountsChanged", (accounts: string[]) => {
+              if (accounts.length === 0) {
+                disconnectWallet();
+              } else {
+                setUserAddress(accounts[0]);
+                registerUser(accounts[0])
+                  .then((user) => {
                     if (user && user.role) setUserRole(user.role);
-                  }).catch(console.error);
-                }
-              });
+                  })
+                  .catch(console.error);
+              }
+            });
 
             provider.on("chainChanged", (chainId: string) => {
               console.log("Chain changed:", chainId);
@@ -156,9 +144,7 @@ export function Web3Provider({ children }: { children: ReactNode }) {
     ],
   );
 
-  const connectWallet = async (
-    connectorType: "metamask" | "walletconnect" = "metamask",
-  ) => {
+  const connectWallet = async (connectorType: "metamask" | "walletconnect" = "metamask") => {
     try {
       if (connectorType === "metamask") {
         await connectMetaMask();
@@ -184,9 +170,11 @@ export function Web3Provider({ children }: { children: ReactNode }) {
       setIsConnected(true);
       setConnectorType("metamask");
 
-      registerUser(address).then(user => {
-        if (user && user.role) setUserRole(user.role);
-      }).catch(console.error);
+      registerUser(address)
+        .then((user) => {
+          if (user && user.role) setUserRole(user.role);
+        })
+        .catch(console.error);
 
       // Load contracts after connection
       await loadContracts(newSigner);
@@ -209,8 +197,7 @@ export function Web3Provider({ children }: { children: ReactNode }) {
 
     // quick session check: if already connected, reuse
     const hasSession = Boolean(
-      (walletConnectProvider as any).session?.length ||
-      (walletConnectProvider as any).connected,
+      (walletConnectProvider as any).session?.length || (walletConnectProvider as any).connected,
     );
     if (hasSession) {
       try {
@@ -229,9 +216,11 @@ export function Web3Provider({ children }: { children: ReactNode }) {
           setIsConnected(true);
           setConnectorType("walletconnect");
 
-          registerUser(address).then(user => {
-            if (user && user.role) setUserRole(user.role);
-          }).catch(console.error);
+          registerUser(address)
+            .then((user) => {
+              if (user && user.role) setUserRole(user.role);
+            })
+            .catch(console.error);
 
           await loadContracts(newSigner);
         }
@@ -267,9 +256,11 @@ export function Web3Provider({ children }: { children: ReactNode }) {
         setIsConnected(true);
         setConnectorType("walletconnect");
 
-        registerUser(address).then(user => {
-          if (user && user.role) setUserRole(user.role);
-        }).catch(console.error);
+        registerUser(address)
+          .then((user) => {
+            if (user && user.role) setUserRole(user.role);
+          })
+          .catch(console.error);
 
         await loadContracts(newSigner);
       }
@@ -316,11 +307,7 @@ export function Web3Provider({ children }: { children: ReactNode }) {
   const loadContracts = async (currentSigner: ethers.Signer) => {
     try {
       // Load factory contract
-      const factory = new ethers.Contract(
-        FACTORY_ADDRESS,
-        FACTORY_ABI,
-        currentSigner,
-      );
+      const factory = new ethers.Contract(FACTORY_ADDRESS, FACTORY_ABI, currentSigner);
       setFactoryContract(factory);
     } catch (error) {
       console.error("Error loading contracts:", error);

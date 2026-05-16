@@ -1142,12 +1142,7 @@ export interface ContractAddresses {
 }
 
 // Role types
-export type UserRole =
-  | "ADMIN"
-  | "ADVERTISER"
-  | "AFFILIATE"
-  | "AUDITOR"
-  | "NONE";
+export type UserRole = "ADMIN" | "ADVERTISER" | "AFFILIATE" | "AUDITOR" | "NONE";
 
 // Export all ABIs as a single object
 export const ABIS = {
@@ -1158,14 +1153,10 @@ export const ABIS = {
 
 // Role constants mapping
 export const ROLE_CONSTANTS = {
-  ADMIN_ROLE:
-    "0xdf8b4c520ffe197c5343c6f5aec59570151ef9a492f2c624fd45ddde6135ec42",
-  ADVERTISER_ROLE:
-    "0x97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b929",
-  AFFILIATE_ROLE:
-    "0xf279e6a1f5e320cca91135676d9cb6e44ca8a08c0b88342bcdb1144f6511b568",
-  AUDITOR_ROLE:
-    "0x19aac1e6afc5c8c0c8c1e6afc5c8c0c8c1e6afc5c8c0c8c1e6afc5c8c0c8c1e6",
+  ADMIN_ROLE: "0xdf8b4c520ffe197c5343c6f5aec59570151ef9a492f2c624fd45ddde6135ec42",
+  ADVERTISER_ROLE: "0x97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b929",
+  AFFILIATE_ROLE: "0xf279e6a1f5e320cca91135676d9cb6e44ca8a08c0b88342bcdb1144f6511b568",
+  AUDITOR_ROLE: "0x19aac1e6afc5c8c0c8c1e6afc5c8c0c8c1e6afc5c8c0c8c1e6afc5c8c0c8c1e6",
 } as const;
 
 export default ABIS;

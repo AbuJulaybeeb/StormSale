@@ -17,17 +17,13 @@ interface WalletConnectContextType extends WalletConnectState {
   setShowNetworkModal: (show: boolean) => void;
 }
 
-const WalletConnectContext = createContext<
-  WalletConnectContextType | undefined
->(undefined);
+const WalletConnectContext = createContext<WalletConnectContextType | undefined>(undefined);
 
 interface WalletConnectProviderProps {
   children: ReactNode;
 }
 
-export const WalletConnectProvider: React.FC<WalletConnectProviderProps> = ({
-  children,
-}) => {
+export const WalletConnectProvider: React.FC<WalletConnectProviderProps> = ({ children }) => {
   const [state, setState] = useState<WalletConnectState>({
     isConnecting: false,
     isSwitchingNetwork: false,
@@ -88,8 +84,7 @@ export const WalletConnectProvider: React.FC<WalletConnectProviderProps> = ({
       } else {
         setState((prev) => ({
           ...prev,
-          error:
-            "Failed to switch to BlockDAG network. Please switch manually.",
+          error: "Failed to switch to BlockDAG network. Please switch manually.",
         }));
         return false;
       }
@@ -123,18 +118,14 @@ export const WalletConnectProvider: React.FC<WalletConnectProviderProps> = ({
   };
 
   return (
-    <WalletConnectContext.Provider value={contextValue}>
-      {children}
-    </WalletConnectContext.Provider>
+    <WalletConnectContext.Provider value={contextValue}>{children}</WalletConnectContext.Provider>
   );
 };
 
 export const useWalletConnect = (): WalletConnectContextType => {
   const context = useContext(WalletConnectContext);
   if (context === undefined) {
-    throw new Error(
-      "useWalletConnect must be used within a WalletConnectProvider",
-    );
+    throw new Error("useWalletConnect must be used within a WalletConnectProvider");
   }
   return context;
 };

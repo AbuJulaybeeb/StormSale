@@ -6,15 +6,7 @@ import {
   CardTitle,
 } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
-import {
-  BarChart3,
-  TrendingUp,
-  Users,
-  DollarSign,
-  Eye,
-  Download,
-  Calendar,
-} from "lucide-react";
+import { BarChart3, TrendingUp, Users, DollarSign, Eye, Download, Calendar } from "lucide-react";
 
 export const CampaignAnalytics = () => {
   const campaignStats = [
@@ -129,7 +121,9 @@ export const CampaignAnalytics = () => {
                     <p className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                       {metric.label}
                     </p>
-                    <p className="text-2xl font-extrabold text-zinc-900 dark:text-white mt-2 mb-1">{metric.value}</p>
+                    <p className="text-2xl font-extrabold text-zinc-900 dark:text-white mt-2 mb-1">
+                      {metric.value}
+                    </p>
                     <p className="text-xs font-medium text-indigo-600 dark:text-indigo-400">
                       {metric.change}
                     </p>
@@ -149,7 +143,9 @@ export const CampaignAnalytics = () => {
         {/* Campaign Performance */}
         <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
           <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
-            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Campaign Performance</CardTitle>
+            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">
+              Campaign Performance
+            </CardTitle>
             <CardDescription className="text-zinc-500 dark:text-zinc-400">
               Revenue and sales across all your campaigns
             </CardDescription>
@@ -166,7 +162,9 @@ export const CampaignAnalytics = () => {
                       <BarChart3 className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                     </div>
                     <div>
-                      <div className="font-bold text-sm text-zinc-900 dark:text-white">{campaign.name}</div>
+                      <div className="font-bold text-sm text-zinc-900 dark:text-white">
+                        {campaign.name}
+                      </div>
                       <div className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-1">
                         {campaign.affiliates} affiliates • {campaign.sales} sales
                       </div>
@@ -189,7 +187,9 @@ export const CampaignAnalytics = () => {
         {/* Top Performers */}
         <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
           <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
-            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Top Affiliates</CardTitle>
+            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">
+              Top Affiliates
+            </CardTitle>
             <CardDescription className="text-zinc-500 dark:text-zinc-400">
               Your highest performing affiliates
             </CardDescription>
@@ -209,7 +209,9 @@ export const CampaignAnalytics = () => {
                         .join("")}
                     </div>
                     <div>
-                      <div className="font-bold text-sm text-zinc-900 dark:text-white">{affiliate.name}</div>
+                      <div className="font-bold text-sm text-zinc-900 dark:text-white">
+                        {affiliate.name}
+                      </div>
                       <div className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-1">
                         {affiliate.sales} sales
                       </div>
@@ -246,7 +248,9 @@ export const CampaignAnalytics = () => {
       {/* Revenue Chart Placeholder */}
       <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
         <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
-          <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Revenue Trends</CardTitle>
+          <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">
+            Revenue Trends
+          </CardTitle>
           <CardDescription className="text-zinc-500 dark:text-zinc-400">
             Monthly revenue performance over time
           </CardDescription>

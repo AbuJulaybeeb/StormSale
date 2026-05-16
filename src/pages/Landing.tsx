@@ -1,20 +1,7 @@
 import { Button } from "../components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { useWeb3 } from "../hooks/useWeb3";
-import {
-  Shield,
-  FileCheck,
-  Zap,
-  ArrowRight,
-  Star,
-  Lock,
-} from "lucide-react";
+import { Shield, FileCheck, Zap, ArrowRight, Star, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 
 export const Landing = () => {
@@ -38,15 +25,13 @@ export const Landing = () => {
     {
       name: "Mike Rodriguez",
       role: "Affiliate",
-      content:
-        "Earned over $50K in commissions securely. The platform is incredibly reliable.",
+      content: "Earned over $50K in commissions securely. The platform is incredibly reliable.",
       avatar: "MR",
     },
     {
       name: "Emily Watson",
       role: "Enterprise Client",
-      content:
-        "NIST compliance was crucial for us. StormSale delivered beyond expectations.",
+      content: "NIST compliance was crucial for us. StormSale delivered beyond expectations.",
       avatar: "EW",
     },
   ];
@@ -55,7 +40,7 @@ export const Landing = () => {
     <div className="min-h-screen bg-slate-50 dark:bg-zinc-950 font-sans selection:bg-indigo-500/30 overflow-x-hidden">
       {/* Header */}
       <header className="container mx-auto px-4 py-6">
-        <motion.div 
+        <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           className="flex justify-between items-center"
@@ -92,7 +77,7 @@ export const Landing = () => {
         </div>
 
         <div className="max-w-4xl mx-auto flex flex-col items-center">
-          <motion.div 
+          <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -104,7 +89,7 @@ export const Landing = () => {
             </span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.1 }}
@@ -116,18 +101,18 @@ export const Landing = () => {
             </span>{" "}
             Stack
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
             className="text-lg md:text-2xl text-zinc-600 dark:text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed font-medium"
           >
-            Built on BlockDAG. Powered by NIST-level encryption. 
-            Automate your affiliate program with complete transparency.
+            Built on BlockDAG. Powered by NIST-level encryption. Automate your affiliate program
+            with complete transparency.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -156,7 +141,7 @@ export const Landing = () => {
       <section id="stats" className="container mx-auto px-4 py-12 md:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
           {stats.map((stat, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -178,7 +163,9 @@ export const Landing = () => {
       {/* Features Section */}
       <section id="features" className="container mx-auto px-4 py-16 md:py-24">
         <div className="text-center mb-12 md:mb-20">
-          <h2 className="text-4xl md:text-6xl font-black mb-4 tracking-tighter text-zinc-900 dark:text-white">Enterprise Protocol</h2>
+          <h2 className="text-4xl md:text-6xl font-black mb-4 tracking-tighter text-zinc-900 dark:text-white">
+            Enterprise Protocol
+          </h2>
           <p className="text-lg md:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto font-medium">
             Military-grade security frameworks for trustless collaboration
           </p>
@@ -213,7 +200,9 @@ export const Landing = () => {
                   <div className="w-20 h-20 bg-zinc-900 dark:bg-indigo-600 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:rotate-6 transition-transform duration-500 shadow-xl">
                     <feature.icon className="w-10 h-10 text-white" />
                   </div>
-                  <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white mb-4">{feature.title}</CardTitle>
+                  <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white mb-4">
+                    {feature.title}
+                  </CardTitle>
                   <CardDescription className="text-lg text-zinc-500 dark:text-zinc-400 font-medium leading-relaxed">
                     {feature.desc}
                   </CardDescription>
@@ -250,7 +239,9 @@ export const Landing = () => {
                       {testimonial.avatar}
                     </div>
                     <div>
-                      <div className="font-bold text-lg text-zinc-900 dark:text-white">{testimonial.name}</div>
+                      <div className="font-bold text-lg text-zinc-900 dark:text-white">
+                        {testimonial.name}
+                      </div>
                       <div className="text-sm font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
                         {testimonial.role}
                       </div>
@@ -261,10 +252,7 @@ export const Landing = () => {
                   </p>
                   <div className="flex space-x-1 mt-6">
                     {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className="w-5 h-5 fill-indigo-500 text-indigo-500"
-                      />
+                      <Star key={star} className="w-5 h-5 fill-indigo-500 text-indigo-500" />
                     ))}
                   </div>
                 </CardContent>
@@ -276,16 +264,16 @@ export const Landing = () => {
 
       {/* CTA Section */}
       <section className="container mx-auto px-4 py-24">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="bg-zinc-900 dark:bg-indigo-600 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl"
         >
           <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
+            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
           </div>
-          
+
           <h2 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tighter">
             Ready to scale securely?
           </h2>
@@ -320,7 +308,9 @@ export const Landing = () => {
                 <div className="w-10 h-10 bg-zinc-900 dark:bg-indigo-600 rounded-xl flex items-center justify-center">
                   <Shield className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-2xl font-black text-zinc-900 dark:text-white tracking-tighter">StormSale</span>
+                <span className="text-2xl font-black text-zinc-900 dark:text-white tracking-tighter">
+                  StormSale
+                </span>
               </div>
               <p className="text-zinc-500 dark:text-zinc-500 text-sm font-medium leading-relaxed max-w-xs">
                 Next-generation affiliate protocol. Secure, trustless, and fully decentralized.
@@ -328,11 +318,25 @@ export const Landing = () => {
             </div>
             {["Product", "Company", "Legal"].map((title, i) => (
               <div key={i}>
-                <h3 className="font-bold text-zinc-900 dark:text-white mb-6 uppercase tracking-widest text-xs">{title}</h3>
+                <h3 className="font-bold text-zinc-900 dark:text-white mb-6 uppercase tracking-widest text-xs">
+                  {title}
+                </h3>
                 <ul className="space-y-4 text-sm font-bold text-zinc-500 dark:text-zinc-500">
-                  <li><a href="#" className="hover:text-indigo-600 transition-colors">Link Item 1</a></li>
-                  <li><a href="#" className="hover:text-indigo-600 transition-colors">Link Item 2</a></li>
-                  <li><a href="#" className="hover:text-indigo-600 transition-colors">Link Item 3</a></li>
+                  <li>
+                    <a href="#" className="hover:text-indigo-600 transition-colors">
+                      Link Item 1
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-indigo-600 transition-colors">
+                      Link Item 2
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-indigo-600 transition-colors">
+                      Link Item 3
+                    </a>
+                  </li>
                 </ul>
               </div>
             ))}

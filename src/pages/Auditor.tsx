@@ -4,15 +4,8 @@ import { VerifyAccess } from "../components/auditor/VerifyAccess";
 import { AuditHistory } from "../components/auditor/AuditHistory";
 import { ComplianceReport } from "../components/auditor/ComplianceReport";
 import { Sidebar } from "../components/shared/Sidebar";
-import {
-  NotificationProvider,
-} from "../context/NotificationContext";
-import {
-  BarChart3,
-  Eye,
-  ClipboardList,
-  FileCheck,
-} from "lucide-react";
+import { NotificationProvider } from "../context/NotificationContext";
+import { BarChart3, Eye, ClipboardList, FileCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface AuditorProps {

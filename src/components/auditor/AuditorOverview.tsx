@@ -51,7 +51,9 @@ export const AuditorOverview = () => {
         </div>
         <div className="flex items-center gap-2 mt-6 lg:mt-0 px-4 py-2 bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 rounded-full">
           <Shield className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-          <span className="text-sm font-bold text-indigo-700 dark:text-indigo-300">NIST/ISO Compliant</span>
+          <span className="text-sm font-bold text-indigo-700 dark:text-indigo-300">
+            NIST/ISO Compliant
+          </span>
         </div>
       </div>
 
@@ -60,13 +62,22 @@ export const AuditorOverview = () => {
         {stats.map((stat, i) => {
           const Icon = stat.icon;
           return (
-            <Card key={i} className="bg-white dark:bg-zinc-900/80 shadow-sm border border-slate-200 dark:border-zinc-800 hover:shadow-md transition-shadow rounded-2xl">
+            <Card
+              key={i}
+              className="bg-white dark:bg-zinc-900/80 shadow-sm border border-slate-200 dark:border-zinc-800 hover:shadow-md transition-shadow rounded-2xl"
+            >
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">{stat.title}</p>
-                    <p className="text-2xl font-extrabold text-zinc-900 dark:text-white mt-2 mb-1">{stat.value}</p>
-                    <p className="text-xs font-medium text-indigo-600 dark:text-indigo-400">{stat.change}</p>
+                    <p className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                      {stat.title}
+                    </p>
+                    <p className="text-2xl font-extrabold text-zinc-900 dark:text-white mt-2 mb-1">
+                      {stat.value}
+                    </p>
+                    <p className="text-xs font-medium text-indigo-600 dark:text-indigo-400">
+                      {stat.change}
+                    </p>
                   </div>
                   <div className="w-10 h-10 bg-slate-100 dark:bg-zinc-800 rounded-xl flex items-center justify-center border border-slate-200 dark:border-zinc-700 shrink-0">
                     <Icon className="w-5 h-5 text-zinc-900 dark:text-indigo-400" />
@@ -83,37 +94,56 @@ export const AuditorOverview = () => {
         {/* Recent Audit History */}
         <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
           <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
-            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Recent Audits</CardTitle>
-            <CardDescription className="text-zinc-500 dark:text-zinc-400">Latest access verifications</CardDescription>
+            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">
+              Recent Audits
+            </CardTitle>
+            <CardDescription className="text-zinc-500 dark:text-zinc-400">
+              Latest access verifications
+            </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
             <div className="space-y-4">
               {recentAudits.map((audit, i) => (
-                <div key={i} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-zinc-950/50 border border-slate-100 dark:border-zinc-800/50 rounded-xl hover:border-slate-200 dark:hover:border-zinc-700 transition-colors">
+                <div
+                  key={i}
+                  className="flex items-center justify-between p-4 bg-slate-50 dark:bg-zinc-950/50 border border-slate-100 dark:border-zinc-800/50 rounded-xl hover:border-slate-200 dark:hover:border-zinc-700 transition-colors"
+                >
                   <div className="flex items-center space-x-3">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-                      audit.status === "Verified"
-                        ? "bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20"
-                        : "bg-red-50 dark:bg-red-500/10 border border-red-100 dark:border-red-500/20"
-                    }`}>
-                      {audit.status === "Verified"
-                        ? <CheckCircle2 className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-                        : <AlertTriangle className="w-5 h-5 text-red-500 dark:text-red-400" />}
+                    <div
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                        audit.status === "Verified"
+                          ? "bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20"
+                          : "bg-red-50 dark:bg-red-500/10 border border-red-100 dark:border-red-500/20"
+                      }`}
+                    >
+                      {audit.status === "Verified" ? (
+                        <CheckCircle2 className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                      ) : (
+                        <AlertTriangle className="w-5 h-5 text-red-500 dark:text-red-400" />
+                      )}
                     </div>
                     <div>
-                      <div className="font-bold text-sm text-zinc-900 dark:text-white">{audit.campaign}</div>
-                      <div className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 mt-0.5">Sale #{audit.saleId}</div>
+                      <div className="font-bold text-sm text-zinc-900 dark:text-white">
+                        {audit.campaign}
+                      </div>
+                      <div className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 mt-0.5">
+                        Sale #{audit.saleId}
+                      </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className={`inline-flex text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-full ${
-                      audit.status === "Verified"
-                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400"
-                        : "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400"
-                    }`}>
+                    <span
+                      className={`inline-flex text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-full ${
+                        audit.status === "Verified"
+                          ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400"
+                          : "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400"
+                      }`}
+                    >
                       {audit.status}
                     </span>
-                    <div className="text-xs font-medium text-zinc-400 dark:text-zinc-500 mt-1">{audit.timestamp}</div>
+                    <div className="text-xs font-medium text-zinc-400 dark:text-zinc-500 mt-1">
+                      {audit.timestamp}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -124,33 +154,49 @@ export const AuditorOverview = () => {
         {/* Pending Access Requests */}
         <Card className="border border-slate-200 dark:border-zinc-800 shadow-sm rounded-2xl bg-white dark:bg-zinc-900/50">
           <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 pb-4">
-            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Pending Requests</CardTitle>
-            <CardDescription className="text-zinc-500 dark:text-zinc-400">Audit access requests awaiting review</CardDescription>
+            <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">
+              Pending Requests
+            </CardTitle>
+            <CardDescription className="text-zinc-500 dark:text-zinc-400">
+              Audit access requests awaiting review
+            </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
             <div className="space-y-4">
               {pendingRequests.map((req, i) => (
-                <div key={i} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-zinc-950/50 border border-slate-100 dark:border-zinc-800/50 rounded-xl">
+                <div
+                  key={i}
+                  className="flex items-center justify-between p-4 bg-slate-50 dark:bg-zinc-950/50 border border-slate-100 dark:border-zinc-800/50 rounded-xl"
+                >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-500/20 rounded-xl flex items-center justify-center shrink-0">
                       <FileSearch className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                     </div>
                     <div>
-                      <div className="font-bold text-sm text-zinc-900 dark:text-white">{req.campaign}</div>
-                      <div className="text-xs font-mono text-zinc-400 dark:text-zinc-500 mt-0.5">{req.requestedBy} · Sale #{req.saleId}</div>
+                      <div className="font-bold text-sm text-zinc-900 dark:text-white">
+                        {req.campaign}
+                      </div>
+                      <div className="text-xs font-mono text-zinc-400 dark:text-zinc-500 mt-0.5">
+                        {req.requestedBy} · Sale #{req.saleId}
+                      </div>
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-2">
-                    <span className={`text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-full ${
-                      req.urgency === "High"
-                        ? "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400"
-                        : req.urgency === "Medium"
-                        ? "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400"
-                        : "bg-slate-200 text-slate-600 dark:bg-zinc-800 dark:text-zinc-400"
-                    }`}>
+                    <span
+                      className={`text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-full ${
+                        req.urgency === "High"
+                          ? "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400"
+                          : req.urgency === "Medium"
+                            ? "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400"
+                            : "bg-slate-200 text-slate-600 dark:bg-zinc-800 dark:text-zinc-400"
+                      }`}
+                    >
                       {req.urgency}
                     </span>
-                    <Button size="sm" className="h-7 px-3 text-xs bg-zinc-900 dark:bg-indigo-600 text-white rounded-lg font-semibold">
+                    <Button
+                      size="sm"
+                      className="h-7 px-3 text-xs bg-zinc-900 dark:bg-indigo-600 text-white rounded-lg font-semibold"
+                    >
                       Review
                     </Button>
                   </div>

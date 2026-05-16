@@ -51,8 +51,7 @@ export const ClaimPayouts = () => {
     return Date.now() / 1000 >= sale.timestamp + sale.clearingPeriod;
   };
 
-  const formatTimestamp = (timestamp: number) =>
-    new Date(timestamp * 1000).toLocaleDateString();
+  const formatTimestamp = (timestamp: number) => new Date(timestamp * 1000).toLocaleDateString();
 
   const getTimeRemaining = (sale: ClaimableSale) => {
     const remaining = sale.timestamp + sale.clearingPeriod - Date.now() / 1000;
@@ -64,7 +63,9 @@ export const ClaimPayouts = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">Claim Payouts</h2>
+        <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
+          Claim Payouts
+        </h2>
         <p className="text-zinc-500 dark:text-zinc-400 mt-2 font-medium">
           Claim commissions after the on-chain clearing period has ended
         </p>
@@ -76,7 +77,9 @@ export const ClaimPayouts = () => {
               <DollarSign className="w-7 h-7 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">Claimable Commissions</CardTitle>
+              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">
+                Claimable Commissions
+              </CardTitle>
               <CardDescription className="text-zinc-500 dark:text-zinc-400 mt-1">
                 Sales past the clearing period are ready to withdraw
               </CardDescription>
@@ -88,28 +91,57 @@ export const ClaimPayouts = () => {
             <Table>
               <TableHeader>
                 <TableRow className="border-b border-slate-100 dark:border-zinc-800/50 bg-slate-50 dark:bg-zinc-950/50">
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4 pl-6">Sale ID</TableHead>
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">Amount</TableHead>
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">Commission</TableHead>
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">Date</TableHead>
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">Status</TableHead>
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4 pr-6">Action</TableHead>
+                  <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4 pl-6">
+                    Sale ID
+                  </TableHead>
+                  <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">
+                    Amount
+                  </TableHead>
+                  <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">
+                    Commission
+                  </TableHead>
+                  <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">
+                    Date
+                  </TableHead>
+                  <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">
+                    Status
+                  </TableHead>
+                  <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4 pr-6">
+                    Action
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {mockClaimableSales.map((sale) => (
-                  <TableRow key={sale.id} className="border-b border-slate-50 dark:border-zinc-900 hover:bg-slate-50/50 dark:hover:bg-zinc-900/30 transition-colors">
-                    <TableCell className="font-mono font-bold text-zinc-900 dark:text-white py-4 pl-6">#{sale.id}</TableCell>
-                    <TableCell className="font-semibold text-zinc-700 dark:text-zinc-300 py-4">{sale.saleAmount} BDAG</TableCell>
-                    <TableCell className="font-bold text-indigo-600 dark:text-indigo-400 py-4">{sale.commissionAmount} BDAG</TableCell>
-                    <TableCell className="text-zinc-500 dark:text-zinc-400 font-medium py-4">{formatTimestamp(sale.timestamp)}</TableCell>
+                  <TableRow
+                    key={sale.id}
+                    className="border-b border-slate-50 dark:border-zinc-900 hover:bg-slate-50/50 dark:hover:bg-zinc-900/30 transition-colors"
+                  >
+                    <TableCell className="font-mono font-bold text-zinc-900 dark:text-white py-4 pl-6">
+                      #{sale.id}
+                    </TableCell>
+                    <TableCell className="font-semibold text-zinc-700 dark:text-zinc-300 py-4">
+                      {sale.saleAmount} BDAG
+                    </TableCell>
+                    <TableCell className="font-bold text-indigo-600 dark:text-indigo-400 py-4">
+                      {sale.commissionAmount} BDAG
+                    </TableCell>
+                    <TableCell className="text-zinc-500 dark:text-zinc-400 font-medium py-4">
+                      {formatTimestamp(sale.timestamp)}
+                    </TableCell>
                     <TableCell className="py-4">
-                      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                        isSaleClaimable(sale)
-                          ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400"
-                          : "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400"
-                      }`}>
-                        {isSaleClaimable(sale) ? <CheckCircle2 className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
+                      <span
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                          isSaleClaimable(sale)
+                            ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400"
+                            : "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400"
+                        }`}
+                      >
+                        {isSaleClaimable(sale) ? (
+                          <CheckCircle2 className="w-3 h-3" />
+                        ) : (
+                          <Clock className="w-3 h-3" />
+                        )}
                         {getTimeRemaining(sale)}
                       </span>
                     </TableCell>

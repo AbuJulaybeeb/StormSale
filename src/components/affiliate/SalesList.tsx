@@ -71,14 +71,15 @@ export const SalesList = () => {
     }
   };
 
-  const formatTimestamp = (timestamp: number) =>
-    new Date(timestamp * 1000).toLocaleDateString();
+  const formatTimestamp = (timestamp: number) => new Date(timestamp * 1000).toLocaleDateString();
 
   return (
     <>
       <div className="space-y-6">
         <div>
-          <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">My Sales</h2>
+          <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
+            My Sales
+          </h2>
           <p className="text-zinc-500 dark:text-zinc-400 mt-2 font-medium">
             View and decrypt your encrypted on-chain sale data
           </p>
@@ -90,7 +91,9 @@ export const SalesList = () => {
                 <Shield className="w-7 h-7 text-white" />
               </div>
               <div>
-                <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">Encrypted Sales</CardTitle>
+                <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">
+                  Encrypted Sales
+                </CardTitle>
                 <CardDescription className="text-zinc-500 dark:text-zinc-400 mt-1">
                   Decrypt using your private key to view sale details
                 </CardDescription>
@@ -102,28 +105,57 @@ export const SalesList = () => {
               <Table>
                 <TableHeader>
                   <TableRow className="border-b border-slate-100 dark:border-zinc-800/50 bg-slate-50 dark:bg-zinc-950/50">
-                    <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4 pl-6">Sale ID</TableHead>
-                    <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">Amount</TableHead>
-                    <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">Commission</TableHead>
-                    <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">Date</TableHead>
-                    <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">Status</TableHead>
-                    <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4 pr-6">Action</TableHead>
+                    <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4 pl-6">
+                      Sale ID
+                    </TableHead>
+                    <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">
+                      Amount
+                    </TableHead>
+                    <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">
+                      Commission
+                    </TableHead>
+                    <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">
+                      Date
+                    </TableHead>
+                    <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4">
+                      Status
+                    </TableHead>
+                    <TableHead className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 py-4 pr-6">
+                      Action
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {mockSales.map((sale) => (
-                    <TableRow key={sale.id} className="border-b border-slate-50 dark:border-zinc-900 hover:bg-slate-50/50 dark:hover:bg-zinc-900/30 transition-colors">
-                      <TableCell className="font-mono font-bold text-zinc-900 dark:text-white py-4 pl-6">#{sale.id}</TableCell>
-                      <TableCell className="font-semibold text-zinc-700 dark:text-zinc-300 py-4">{sale.saleAmount} BDAG</TableCell>
-                      <TableCell className="font-bold text-indigo-600 dark:text-indigo-400 py-4">{sale.commissionAmount} BDAG</TableCell>
-                      <TableCell className="text-zinc-500 dark:text-zinc-400 font-medium py-4">{formatTimestamp(sale.timestamp)}</TableCell>
+                    <TableRow
+                      key={sale.id}
+                      className="border-b border-slate-50 dark:border-zinc-900 hover:bg-slate-50/50 dark:hover:bg-zinc-900/30 transition-colors"
+                    >
+                      <TableCell className="font-mono font-bold text-zinc-900 dark:text-white py-4 pl-6">
+                        #{sale.id}
+                      </TableCell>
+                      <TableCell className="font-semibold text-zinc-700 dark:text-zinc-300 py-4">
+                        {sale.saleAmount} BDAG
+                      </TableCell>
+                      <TableCell className="font-bold text-indigo-600 dark:text-indigo-400 py-4">
+                        {sale.commissionAmount} BDAG
+                      </TableCell>
+                      <TableCell className="text-zinc-500 dark:text-zinc-400 font-medium py-4">
+                        {formatTimestamp(sale.timestamp)}
+                      </TableCell>
                       <TableCell className="py-4">
-                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                          sale.claimed
-                            ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400"
-                            : "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400"
-                        }`}>
-                          {sale.claimed ? <CheckCircle2 className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                            sale.claimed
+                              ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400"
+                              : "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400"
+                          }`}
+                        >
+                          {sale.claimed ? (
+                            <CheckCircle2 className="w-3 h-3" />
+                          ) : (
+                            <Clock className="w-3 h-3" />
+                          )}
                           {sale.claimed ? "Claimed" : "Pending"}
                         </span>
                       </TableCell>
@@ -151,7 +183,9 @@ export const SalesList = () => {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="rounded-2xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold text-zinc-900 dark:text-white">Decrypted Sale Data</DialogTitle>
+            <DialogTitle className="text-xl font-bold text-zinc-900 dark:text-white">
+              Decrypted Sale Data
+            </DialogTitle>
             <DialogDescription className="text-zinc-500 dark:text-zinc-400">
               This is the verified, decrypted sale information
             </DialogDescription>

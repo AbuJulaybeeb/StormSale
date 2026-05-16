@@ -4,17 +4,8 @@ import { JoinCampaignButton } from "../components/affiliate/JoinCampaignButton";
 import { SalesList } from "../components/affiliate/SalesList";
 import { ClaimPayouts } from "../components/affiliate/ClaimPayouts";
 import { AffiliateOverview } from "../components/affiliate/AffiliateOverview";
-import {
-  Users,
-  TrendingUp,
-  DollarSign,
-  BarChart3,
-  Shield,
-  LayoutDashboard,
-} from "lucide-react";
-import {
-  NotificationProvider,
-} from "../context/NotificationContext";
+import { Users, TrendingUp, DollarSign, BarChart3, Shield, LayoutDashboard } from "lucide-react";
+import { NotificationProvider } from "../context/NotificationContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface AffiliateProps {

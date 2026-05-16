@@ -4,13 +4,7 @@ import { Moon, Sun, Shield, Wallet, ExternalLink, ChevronDown } from "lucide-rea
 import { useState, useEffect, useRef } from "react";
 
 export const Header = () => {
-  const {
-    userAddress,
-    connectWallet,
-    disconnectWallet,
-    isConnected,
-    connectorType,
-  } = useWeb3();
+  const { userAddress, connectWallet, disconnectWallet, isConnected, connectorType } = useWeb3();
   const [darkMode, setDarkMode] = useState(false);
   const [showWalletOptions, setShowWalletOptions] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -39,8 +33,7 @@ export const Header = () => {
     document.documentElement.classList.toggle("dark", newDarkMode);
   };
 
-  const formatAddress = (address: string) =>
-    `${address.slice(0, 6)}...${address.slice(-4)}`;
+  const formatAddress = (address: string) => `${address.slice(0, 6)}...${address.slice(-4)}`;
 
   const handleConnect = async (type: "metamask" | "walletconnect") => {
     try {
@@ -82,9 +75,9 @@ export const Header = () => {
               </a>
             ))
           ) : (
-             <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-100 dark:border-indigo-500/20">
-                Enterprise Dashboard
-             </span>
+            <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-100 dark:border-indigo-500/20">
+              Enterprise Dashboard
+            </span>
           )}
         </nav>
 
@@ -98,11 +91,7 @@ export const Header = () => {
             className="w-10 h-10 rounded-xl hover:bg-slate-100 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-400"
             aria-label="Toggle dark mode"
           >
-            {darkMode ? (
-              <Sun className="w-4 h-4" />
-            ) : (
-              <Moon className="w-4 h-4" />
-            )}
+            {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </Button>
 
           {/* Wallet area */}
@@ -133,7 +122,9 @@ export const Header = () => {
               >
                 <Wallet className="w-4 h-4 mr-2" />
                 Connect Wallet
-                <ChevronDown className={`w-3.5 h-3.5 ml-2 transition-transform ${showWalletOptions ? "rotate-180" : ""}`} />
+                <ChevronDown
+                  className={`w-3.5 h-3.5 ml-2 transition-transform ${showWalletOptions ? "rotate-180" : ""}`}
+                />
               </Button>
 
               {showWalletOptions && (
@@ -147,8 +138,12 @@ export const Header = () => {
                         <Wallet className="w-4 h-4 text-orange-600 dark:text-orange-400" />
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-zinc-900 dark:text-white">MetaMask</div>
-                        <div className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500">Browser extension</div>
+                        <div className="text-sm font-bold text-zinc-900 dark:text-white">
+                          MetaMask
+                        </div>
+                        <div className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500">
+                          Browser extension
+                        </div>
                       </div>
                     </button>
                     <button
@@ -159,8 +154,12 @@ export const Header = () => {
                         <ExternalLink className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                       </div>
                       <div>
-                        <div className="text-sm font-bold text-zinc-900 dark:text-white">WalletConnect</div>
-                        <div className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500">Mobile & multi-wallet</div>
+                        <div className="text-sm font-bold text-zinc-900 dark:text-white">
+                          WalletConnect
+                        </div>
+                        <div className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500">
+                          Mobile & multi-wallet
+                        </div>
                       </div>
                     </button>
                   </div>

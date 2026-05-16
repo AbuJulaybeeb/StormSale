@@ -7,14 +7,7 @@ import {
   CardTitle,
 } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
-import {
-  FileCheck,
-  AlertTriangle,
-  CheckCircle2,
-  Download,
-  Clock,
-  Lock,
-} from "lucide-react";
+import { FileCheck, AlertTriangle, CheckCircle2, Download, Clock, Lock } from "lucide-react";
 
 const complianceItems = [
   {
@@ -22,7 +15,8 @@ const complianceItems = [
     category: "Access Control (AC)",
     status: "Compliant",
     lastChecked: "2026-05-16",
-    details: "All audit access operations use cryptographic key verification before granting data access.",
+    details:
+      "All audit access operations use cryptographic key verification before granting data access.",
   },
   {
     standard: "ISO/IEC 27001",
@@ -36,7 +30,8 @@ const complianceItems = [
     category: "Security of Processing",
     status: "Review Needed",
     lastChecked: "2026-05-10",
-    details: "Customer PII handling policy pending review. Encryption is implemented but documented controls need update.",
+    details:
+      "Customer PII handling policy pending review. Encryption is implemented but documented controls need update.",
   },
   {
     standard: "SOC 2 Type II",
@@ -50,7 +45,8 @@ const complianceItems = [
     category: "Cryptographic Module Validation",
     status: "Compliant",
     lastChecked: "2026-05-15",
-    details: "AES-GCM encryption with validated key derivation functions in use across all campaigns.",
+    details:
+      "AES-GCM encryption with validated key derivation functions in use across all campaigns.",
   },
 ];
 
@@ -73,7 +69,9 @@ export const ComplianceReport = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">Compliance Report</h2>
+          <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
+            Compliance Report
+          </h2>
           <p className="text-zinc-500 dark:text-zinc-400 mt-2 font-medium">
             Security & regulatory compliance status for active campaigns
           </p>
@@ -89,22 +87,30 @@ export const ComplianceReport = () => {
         <Card className="border border-slate-200 dark:border-zinc-800 rounded-2xl bg-white dark:bg-zinc-900/80 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500" />
           <CardContent className="p-6">
-            <div className="text-3xl font-extrabold text-zinc-900 dark:text-white">{compliant}/{complianceItems.length}</div>
-            <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-2">Standards Compliant</div>
+            <div className="text-3xl font-extrabold text-zinc-900 dark:text-white">
+              {compliant}/{complianceItems.length}
+            </div>
+            <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-2">
+              Standards Compliant
+            </div>
           </CardContent>
         </Card>
         <Card className="border border-slate-200 dark:border-zinc-800 rounded-2xl bg-white dark:bg-zinc-900/80 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-1 h-full bg-amber-500" />
           <CardContent className="p-6">
             <div className="text-3xl font-extrabold text-zinc-900 dark:text-white">{review}</div>
-            <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-2">Require Review</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-2">
+              Require Review
+            </div>
           </CardContent>
         </Card>
         <Card className="border border-slate-200 dark:border-zinc-800 rounded-2xl bg-white dark:bg-zinc-900/80 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
           <CardContent className="p-6">
             <div className="text-3xl font-extrabold text-zinc-900 dark:text-white">AES-256</div>
-            <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-2">Encryption Standard</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-2">
+              Encryption Standard
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -117,8 +123,12 @@ export const ComplianceReport = () => {
               <FileCheck className="w-6 h-6 text-white" />
             </div>
             <div>
-              <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">Regulatory Standards</CardTitle>
-              <CardDescription className="text-zinc-500 dark:text-zinc-400 mt-1">Compliance status for active security frameworks</CardDescription>
+              <CardTitle className="text-lg font-bold text-zinc-900 dark:text-white">
+                Regulatory Standards
+              </CardTitle>
+              <CardDescription className="text-zinc-500 dark:text-zinc-400 mt-1">
+                Compliance status for active security frameworks
+              </CardDescription>
             </div>
           </div>
         </CardHeader>
@@ -128,25 +138,42 @@ export const ComplianceReport = () => {
               const cfg = statusMap[item.status];
               const StatusIcon = cfg.icon;
               return (
-                <div key={i} className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 px-8 py-6 hover:bg-slate-50/50 dark:hover:bg-zinc-900/30 transition-colors">
+                <div
+                  key={i}
+                  className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 px-8 py-6 hover:bg-slate-50/50 dark:hover:bg-zinc-900/30 transition-colors"
+                >
                   <div className="flex items-start gap-4">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-                      item.status === "Compliant"
-                        ? "bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20"
-                        : "bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-500/20"
-                    }`}>
-                      <StatusIcon className={`w-5 h-5 ${
-                        item.status === "Compliant" ? "text-emerald-600 dark:text-emerald-400" : "text-amber-600 dark:text-amber-400"
-                      }`} />
+                    <div
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                        item.status === "Compliant"
+                          ? "bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20"
+                          : "bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-500/20"
+                      }`}
+                    >
+                      <StatusIcon
+                        className={`w-5 h-5 ${
+                          item.status === "Compliant"
+                            ? "text-emerald-600 dark:text-emerald-400"
+                            : "text-amber-600 dark:text-amber-400"
+                        }`}
+                      />
                     </div>
                     <div>
-                      <div className="font-bold text-sm text-zinc-900 dark:text-white">{item.standard}</div>
-                      <div className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5">{item.category}</div>
-                      <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed max-w-lg">{item.details}</p>
+                      <div className="font-bold text-sm text-zinc-900 dark:text-white">
+                        {item.standard}
+                      </div>
+                      <div className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5">
+                        {item.category}
+                      </div>
+                      <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed max-w-lg">
+                        {item.details}
+                      </p>
                     </div>
                   </div>
                   <div className="flex sm:flex-col items-center sm:items-end gap-2 shrink-0">
-                    <span className={`inline-flex text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full ${cfg.badge}`}>
+                    <span
+                      className={`inline-flex text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full ${cfg.badge}`}
+                    >
                       {item.status}
                     </span>
                     <div className="flex items-center gap-1 text-xs text-zinc-400 dark:text-zinc-500">
@@ -169,7 +196,8 @@ export const ComplianceReport = () => {
             <div>
               <p className="font-bold text-zinc-900 dark:text-white text-sm">Audit Immutability</p>
               <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">
-                All compliance audit actions are immutably recorded on the BlockDAG network. Timestamps, access grants and denial logs cannot be altered after they are written.
+                All compliance audit actions are immutably recorded on the BlockDAG network.
+                Timestamps, access grants and denial logs cannot be altered after they are written.
               </p>
             </div>
           </div>

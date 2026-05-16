@@ -18,15 +18,7 @@ import {
 } from "../../components/ui/dialog";
 import { useWeb3 } from "../../hooks/useWeb3";
 import { useNotification } from "../../context/NotificationContext";
-import {
-  Eye,
-  Shield,
-  FileSearch,
-  CheckCircle2,
-  XCircle,
-  Lock,
-  Unlock,
-} from "lucide-react";
+import { Eye, Shield, FileSearch, CheckCircle2, XCircle, Lock, Unlock } from "lucide-react";
 
 export const VerifyAccess = () => {
   const [saleId, setSaleId] = useState("");
@@ -41,7 +33,11 @@ export const VerifyAccess = () => {
 
   const checkAccess = async () => {
     if (!saleId || !campaignAddress || !userAddress) {
-      showNotification({ type: "warning", title: "Missing Information", message: "Please fill all required fields" });
+      showNotification({
+        type: "warning",
+        title: "Missing Information",
+        message: "Please fill all required fields",
+      });
       return;
     }
     setIsChecking(true);
@@ -53,10 +49,16 @@ export const VerifyAccess = () => {
       showNotification({
         type: result ? "success" : "warning",
         title: result ? "Access Granted" : "Access Denied",
-        message: result ? "Your key is verified. You may now decrypt." : "Request access from the campaign advertiser.",
+        message: result
+          ? "Your key is verified. You may now decrypt."
+          : "Request access from the campaign advertiser.",
       });
     } catch (_err) {
-      showNotification({ type: "error", title: "Check Failed", message: "Unable to verify access rights" });
+      showNotification({
+        type: "error",
+        title: "Check Failed",
+        message: "Unable to verify access rights",
+      });
     } finally {
       setIsChecking(false);
     }
@@ -77,20 +79,30 @@ export const VerifyAccess = () => {
       setDecryptedData(stubData);
       setIsDialogOpen(true);
     } catch (_err) {
-      showNotification({ type: "error", title: "Decryption Failed", message: "Unable to decrypt sale data" });
+      showNotification({
+        type: "error",
+        title: "Decryption Failed",
+        message: "Unable to decrypt sale data",
+      });
     } finally {
       setIsDecrypting(false);
     }
   };
 
   const requestAccess = () => {
-    showNotification({ type: "info", title: "Access Requested", message: "Your request has been sent to the parties involved" });
+    showNotification({
+      type: "info",
+      title: "Access Requested",
+      message: "Your request has been sent to the parties involved",
+    });
   };
 
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">Verify Access Rights</h2>
+        <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
+          Verify Access Rights
+        </h2>
         <p className="text-zinc-500 dark:text-zinc-400 mt-2 font-medium">
           Check your cryptographic permissions for encrypted sale data
         </p>
@@ -103,7 +115,9 @@ export const VerifyAccess = () => {
               <Eye className="w-7 h-7 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">Access Verification</CardTitle>
+              <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white">
+                Access Verification
+              </CardTitle>
               <CardDescription className="text-zinc-500 dark:text-zinc-400 mt-1">
                 Enter the campaign address and sale ID to verify your decryption key
               </CardDescription>
@@ -113,7 +127,11 @@ export const VerifyAccess = () => {
         <CardContent className="px-8 pb-8 pt-6">
           <InputGroup className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
-              <InputField label="Campaign Address" description="The campaign contract address" required>
+              <InputField
+                label="Campaign Address"
+                description="The campaign contract address"
+                required
+              >
                 <Input
                   value={campaignAddress}
                   onChange={(e) => setCampaignAddress(e.target.value)}
@@ -153,19 +171,24 @@ export const VerifyAccess = () => {
 
           {/* Access Result */}
           {hasAccess !== null && (
-            <div className={`mt-8 p-6 rounded-2xl border ${
-              hasAccess
-                ? "bg-indigo-50 dark:bg-indigo-500/10 border-indigo-200 dark:border-indigo-500/20"
-                : "bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/20"
-            }`}>
+            <div
+              className={`mt-8 p-6 rounded-2xl border ${
+                hasAccess
+                  ? "bg-indigo-50 dark:bg-indigo-500/10 border-indigo-200 dark:border-indigo-500/20"
+                  : "bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/20"
+              }`}
+            >
               <div className="flex items-start space-x-4">
                 {hasAccess ? (
                   <>
                     <CheckCircle2 className="w-8 h-8 text-indigo-600 dark:text-indigo-400 mt-1 shrink-0" />
                     <div className="flex-1">
-                      <h4 className="font-bold text-lg text-indigo-900 dark:text-indigo-300">Access Granted</h4>
+                      <h4 className="font-bold text-lg text-indigo-900 dark:text-indigo-300">
+                        Access Granted
+                      </h4>
                       <p className="text-sm font-medium text-indigo-700 dark:text-indigo-400 mt-1">
-                        Your cryptographic key has been verified. You may now decrypt and inspect the sale data.
+                        Your cryptographic key has been verified. You may now decrypt and inspect
+                        the sale data.
                       </p>
                       <Button
                         onClick={handleDecrypt}
@@ -190,7 +213,9 @@ export const VerifyAccess = () => {
                   <>
                     <XCircle className="w-8 h-8 text-red-600 dark:text-red-400 mt-1 shrink-0" />
                     <div>
-                      <h4 className="font-bold text-lg text-red-900 dark:text-red-300">Access Denied</h4>
+                      <h4 className="font-bold text-lg text-red-900 dark:text-red-300">
+                        Access Denied
+                      </h4>
                       <p className="text-sm font-medium text-red-700 dark:text-red-400 mt-1">
                         Your key does not have permission to decrypt this data payload.
                       </p>
@@ -216,9 +241,13 @@ export const VerifyAccess = () => {
           <div className="flex items-start gap-4">
             <Shield className="w-6 h-6 text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
             <div>
-              <p className="font-bold text-zinc-900 dark:text-white text-sm">NIST Compliance Notice</p>
+              <p className="font-bold text-zinc-900 dark:text-white text-sm">
+                NIST Compliance Notice
+              </p>
               <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">
-                All audit access operations are logged permanently on-chain. Unauthorized decryption attempts may be reported under applicable compliance frameworks. Only access data you have been explicitly authorized to review.
+                All audit access operations are logged permanently on-chain. Unauthorized decryption
+                attempts may be reported under applicable compliance frameworks. Only access data
+                you have been explicitly authorized to review.
               </p>
             </div>
           </div>
@@ -233,19 +262,29 @@ export const VerifyAccess = () => {
               <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center">
                 <Unlock className="w-5 h-5 text-white" />
               </div>
-              <DialogTitle className="text-xl font-bold text-zinc-900 dark:text-white">Decrypted Sale Data</DialogTitle>
+              <DialogTitle className="text-xl font-bold text-zinc-900 dark:text-white">
+                Decrypted Sale Data
+              </DialogTitle>
             </div>
             <DialogDescription className="text-zinc-500 dark:text-zinc-400">
               Verified sale #{saleId} · {campaignAddress.slice(0, 14)}...
             </DialogDescription>
           </DialogHeader>
           <div className="bg-slate-50 dark:bg-zinc-950 p-5 rounded-xl border border-slate-200 dark:border-zinc-800 mt-2">
-            {decryptedData && Object.entries(decryptedData).map(([key, val]) => (
-              <div key={key} className="flex justify-between items-center py-2 border-b border-slate-100 dark:border-zinc-800/50 last:border-0">
-                <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">{key}</span>
-                <span className="text-sm font-semibold text-zinc-900 dark:text-white font-mono">{String(val)}</span>
-              </div>
-            ))}
+            {decryptedData &&
+              Object.entries(decryptedData).map(([key, val]) => (
+                <div
+                  key={key}
+                  className="flex justify-between items-center py-2 border-b border-slate-100 dark:border-zinc-800/50 last:border-0"
+                >
+                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                    {key}
+                  </span>
+                  <span className="text-sm font-semibold text-zinc-900 dark:text-white font-mono">
+                    {String(val)}
+                  </span>
+                </div>
+              ))}
           </div>
         </DialogContent>
       </Dialog>
